@@ -1,0 +1,29 @@
+<launch>
+  <arg name="map_file" />
+
+  <!--- Run mapserver -->
+  <include file="$(find robotino_navigation)/launch/map_server.launch">
+    <arg name="map_file" value="$(arg map_file)" />
+  </include>
+
+  <!--- Run AMCL -->
+  <include file="$(find amcl)/examples/amcl_omni.launch" />
+
+  <!--- Run move_base -->
+  <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
+    <rosparam file="$(find robotino_navigation)/config/costmap_common_params.yaml" command="load" ns="global_costmap" />
+    <rosparam file="$(find robotino_navigation)/config/costmap_common_params.yaml" command="load" ns="local_costmap" />
+    <rosparam file="$(find robotino_navigation)/config/local_costmap_params.yaml" command="load" />
+    <rosparam file="$(find robotino_navigation)/config/global_costmap_params.yaml" command="load" />
+    <rosparam file="$(find robotino_navigation)/config/base_local_planner_params.yaml" command="load" />
+    <param name="base_local_planner" value="robotino_local_planner/RobotinoLocalPlanner" />
+    <param name="controller_frequency" value="15.0" />
+    <remap from="cmd_vel" to="robotino_cmd_vel" />
+  </node>
+
+  <!-- Run rviz -->
+  <include file="$(find robotino_navigation)/launch/rviz.launch"/>
+
+  <!-- Run robotino_safety_node -->
+  <include file="$(find robotino_safety)/launch/robotino_safety_node.launch"/>
+</launch>

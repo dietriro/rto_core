@@ -1,0 +1,6 @@
+<launch>
+    <param name="robot_description" command="cat
+        $(find robotino_description)/urdf/robotino_platform_kinect.urdf"/>
+    <node pkg="rviz" type="rviz" name="rviz" args="-d
+        $(find robotino_navigation)/config/robotino.rviz"/>
+</launch>

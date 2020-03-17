@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<robot name="sensor_hokuyo" xmlns:xacro="http://wiki.ros.org/xacro">
+  <xacro:property name="M_PI" value="3.14159"/>
+  <xacro:property name="M_SCALE" value="0.01"/>
+  <xacro:property name="HOKUYO_RADIUS" value="0.02"/>
+  <xacro:property name="HOKUYO_LENGTH" value="0.07"/>
+  <xacro:macro name="hokuyo" params="parent name *origin">
+    <joint name="${name}_joint" type="fixed">
+      <insert_block name="origin" />
+      <parent link="${parent}"/>
+      <child link="${name}_link" />
+    </joint>
+    <link name="${name}_link">
+      <inertial>
+        <mass value="0.00001" />
+        <origin xyz="0 0 0" />
+        <inertia ixx="1.0" ixy="0.0" ixz="0.0"
+          iyy="1.0" iyz="0.0"
+          izz="1.0" />
+      </inertial>
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 ${M_PI/2}" />
+        <geometry>
+          <mesh
+filename="package://robotino_description/meshes/sensors/hokuyo.dae" scale="${M_SCALE} ${M_SCALE} ${M_SCALE}"/>
+        </geometry>
+      </visual>
+      <collision>
+        <origin xyz="0 0 ${HOKUYO_LENGTH/2}" rpy="0 0 0" />
+        <geometry>
+          <cylinder radius="${HOKUYO_RADIUS}" length="${HOKUYO_LENGTH}" />
+        </geometry>
+      </collision>
+    </link>
+  </xacro:macro>
+</robot>

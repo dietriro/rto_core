@@ -1,0 +1,7 @@
+<library path="lib/libRobotinoLocalPlanner">
+  <class name="robotino_local_planner/RobotinoLocalPlanner" type="robotino_local_planner::RobotinoLocalPlanner" base_class_type="nav_core::BaseLocalPlanner">
+    <description>
+      Robotino's custom local planner.
+    </description>
+  </class>
+</library>

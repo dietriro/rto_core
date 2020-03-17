@@ -1,0 +1,6 @@
+<launch>
+  <!-- Run the map server -->
+  <!-- Please check the file path for map files (yaml and pgm) before execution -->
+  <arg name="map_file" default="$(find robotino_navigation)/maps/sample.yaml" />
+  <node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)"/>
+</launch>
