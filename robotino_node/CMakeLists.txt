@@ -181,21 +181,21 @@ target_link_libraries(
   ${catkin_LIBRARIES}
 )
 
-add_executable(
-  robotino_mapping_node
-  src/robotino_mapping_node.cpp
-  src/MappingROS.cpp
-  src/RobotinoMappingNode.cpp
-  src/InitialPoseROS.cpp
-  src/NavGoalROS.cpp
-  src/ComROS.cpp
-)
+#add_executable(
+#  robotino_mapping_node
+#  src/robotino_mapping_node.cpp
+#  src/MappingROS.cpp
+#  src/RobotinoMappingNode.cpp
+#  src/InitialPoseROS.cpp
+#  src/NavGoalROS.cpp
+#  src/ComROS.cpp
+#)
 
-target_link_libraries(
-  robotino_mapping_node
-  ${REC_ROBOTINO_API2_LIBRARY}
-  ${catkin_LIBRARIES}
-)
+#target_link_libraries(
+#  robotino_mapping_node
+#  ${REC_ROBOTINO_API2_LIBRARY}
+#  ${catkin_LIBRARIES}
+#)
 
 ## Add cmake target dependencies of the executable/library
 ## as an example, message headers may need to be generated before nodes
