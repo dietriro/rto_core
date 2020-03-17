@@ -9,7 +9,7 @@
 #include <pluginlib/class_list_macros.h>
 #include <cmath>
 
-PLUGINLIB_DECLARE_CLASS(robotino_local_planner, RobotinoLocalPlanner, robotino_local_planner::RobotinoLocalPlanner, nav_core::BaseLocalPlanner)
+PLUGINLIB_EXPORT_CLASS(robotino_local_planner::RobotinoLocalPlanner, nav_core::BaseLocalPlanner)
 
 #define TRANSFORM_TIMEOUT 0.5
 #define PI 3.141592653
@@ -34,7 +34,7 @@ namespace robotino_local_planner
 		// Empty
 	}
 
-	void RobotinoLocalPlanner::initialize( std::string name, tf::TransformListener* tf, costmap_2d::Costmap2DROS* costmap_ros )
+	void RobotinoLocalPlanner::initialize( std::string name, tf2_ros::Buffer* tf, costmap_2d::Costmap2DROS* costmap_ros )
 	{
 		tf_ = tf;
 
@@ -162,20 +162,24 @@ namespace robotino_local_planner
 		try
 		{
 			boost::mutex::scoped_lock lock(odom_lock_);
-			tf_->waitForTransform( base_odom_.header.frame_id, global_plan_[next_heading_index_].header.frame_id, now, ros::Duration( TRANSFORM_TIMEOUT ) );
-			tf_->transformPose( base_odom_.header.frame_id, global_plan_[next_heading_index_], rotate_goal );
+
+			geometry_msgs::TransformStamped trans = tf_->lookupTransform( base_odom_.header.frame_id, global_plan_[next_heading_index_].header.frame_id, now, ros::Duration( TRANSFORM_TIMEOUT ) );
+      		tf2::doTransform(global_plan_[next_heading_index_], rotate_goal, trans);
+
+			// tf_->waitForTransform( base_odom_.header.frame_id, global_plan_[next_heading_index_].header.frame_id, now, ros::Duration( TRANSFORM_TIMEOUT ) );
+			// tf_->transformPose( base_odom_.header.frame_id, global_plan_[next_heading_index_], rotate_goal );
 		}
-		catch(tf::LookupException& ex)
+		catch(tf2::LookupException& ex)
 		{
 			ROS_ERROR("Lookup Error: %s\n", ex.what());
 			return false;
 		}
-		catch(tf::ConnectivityException& ex)
+		catch(tf2::ConnectivityException& ex)
 		{
 			ROS_ERROR("Connectivity Error: %s\n", ex.what());
 			return false;
 		}
-		catch(tf::ExtrapolationException& ex)
+		catch(tf2::ExtrapolationException& ex)
 		{
 			ROS_ERROR("Extrapolation Error: %s\n", ex.what());
 			return false;
@@ -186,7 +190,7 @@ namespace robotino_local_planner
 		double y = rotate_goal.pose.position.y - base_odom_.pose.position.y;
 
 		// Calculate the rotation between the current odom and the vector created above
-		double rotation = (::atan2(y,x) - tf::getYaw(base_odom_.pose.orientation ) );
+		double rotation = (::atan2(y,x) - tf2::getYaw(base_odom_.pose.orientation ) );
 
 		rotation = mapToMinusPIToPI( rotation );
 
@@ -212,20 +216,24 @@ namespace robotino_local_planner
 		try
 		{
 			boost::mutex::scoped_lock lock(odom_lock_);
-			tf_->waitForTransform( base_odom_.header.frame_id, global_plan_[next_heading_index_].header.frame_id, now, ros::Duration( TRANSFORM_TIMEOUT ) );
-			tf_->transformPose( base_odom_.header.frame_id, global_plan_[next_heading_index_], move_goal );
+
+			geometry_msgs::TransformStamped trans = tf_->lookupTransform( base_odom_.header.frame_id, global_plan_[next_heading_index_].header.frame_id, now, ros::Duration( TRANSFORM_TIMEOUT ) );
+      		tf2::doTransform(global_plan_[next_heading_index_], move_goal, trans);
+
+			// tf_->waitForTransform( base_odom_.header.frame_id, global_plan_[next_heading_index_].header.frame_id, now, ros::Duration( TRANSFORM_TIMEOUT ) );
+			// tf_->transformPose( base_odom_.header.frame_id, global_plan_[next_heading_index_], move_goal );
 		}
-		catch(tf::LookupException& ex)
+		catch(tf2::LookupException& ex)
 		{
 			ROS_ERROR("Lookup Error: %s\n", ex.what());
 			return false;
 		}
-		catch(tf::ConnectivityException& ex)
+		catch(tf2::ConnectivityException& ex)
 		{
 			ROS_ERROR("Connectivity Error: %s\n", ex.what());
 			return false;
 		}
-		catch(tf::ExtrapolationException& ex)
+		catch(tf2::ExtrapolationException& ex)
 		{
 			ROS_ERROR("Extrapolation Error: %s\n", ex.what());
 			return false;
@@ -236,7 +244,7 @@ namespace robotino_local_planner
 		double y = move_goal.pose.position.y - base_odom_.pose.position.y;
 
 		// Calculate the rotation between the current odom and the vector created above
-		double rotation = (::atan2(y,x) - tf::getYaw(base_odom_.pose.orientation ) );
+		double rotation = (::atan2(y,x) - tf2::getYaw(base_odom_.pose.orientation ) );
 
 		rotation = mapToMinusPIToPI( rotation );
 
@@ -278,27 +286,31 @@ namespace robotino_local_planner
 		try
 		{
 			boost::mutex::scoped_lock lock(odom_lock_);
-			tf_->waitForTransform( base_odom_.header.frame_id, global_plan_[next_heading_index_].header.frame_id, now, ros::Duration( TRANSFORM_TIMEOUT ) );
-			tf_->transformPose( base_odom_.header.frame_id, global_plan_[next_heading_index_], rotate_goal );
+
+			geometry_msgs::TransformStamped trans = tf_->lookupTransform( base_odom_.header.frame_id, global_plan_[next_heading_index_].header.frame_id, now, ros::Duration( TRANSFORM_TIMEOUT ) );
+      		tf2::doTransform(global_plan_[next_heading_index_], rotate_goal, trans);
+
+			// tf_->waitForTransform( base_odom_.header.frame_id, global_plan_[next_heading_index_].header.frame_id, now, ros::Duration( TRANSFORM_TIMEOUT ) );
+			// tf_->transformPose( base_odom_.header.frame_id, global_plan_[next_heading_index_], rotate_goal );
 		}
-		catch(tf::LookupException& ex)
+		catch(tf2::LookupException& ex)
 		{
 			ROS_ERROR("Lookup Error: %s\n", ex.what());
 			return false;
 		}
-		catch(tf::ConnectivityException& ex)
+		catch(tf2::ConnectivityException& ex)
 		{
 			ROS_ERROR("Connectivity Error: %s\n", ex.what());
 			return false;
 		}
-		catch(tf::ExtrapolationException& ex)
+		catch(tf2::ExtrapolationException& ex)
 		{
 			ROS_ERROR("Extrapolation Error: %s\n", ex.what());
 			return false;
 		}
 
-		double rotation = tf::getYaw( rotate_goal.pose.orientation ) -
-				tf::getYaw( base_odom_.pose.orientation );
+		double rotation = tf2::getYaw( rotate_goal.pose.orientation ) -
+				tf2::getYaw( base_odom_.pose.orientation );
 
 		if( fabs( rotation ) < yaw_goal_tolerance_ )
 		{
@@ -324,20 +336,23 @@ namespace robotino_local_planner
 
 			try
 			{
-				tf_->waitForTransform( base_odom_.header.frame_id, global_plan_[i].header.frame_id, now, ros::Duration( TRANSFORM_TIMEOUT ) );
-				tf_->transformPose( base_odom_.header.frame_id, global_plan_[i], next_heading_pose );
+				geometry_msgs::TransformStamped trans = tf_->lookupTransform( base_odom_.header.frame_id, global_plan_[next_heading_index_].header.frame_id, now, ros::Duration( TRANSFORM_TIMEOUT ) );
+      			tf2::doTransform(global_plan_[next_heading_index_], next_heading_pose, trans);
+
+				// tf_->waitForTransform( base_odom_.header.frame_id, global_plan_[i].header.frame_id, now, ros::Duration( TRANSFORM_TIMEOUT ) );
+				// tf_->transformPose( base_odom_.header.frame_id, global_plan_[i], next_heading_pose );
 			}
-			catch(tf::LookupException& ex)
+			catch(tf2::LookupException& ex)
 			{
 				ROS_ERROR("Lookup Error: %s\n", ex.what());
 				return;
 			}
-			catch(tf::ConnectivityException& ex)
+			catch(tf2::ConnectivityException& ex)
 			{
 				ROS_ERROR("Connectivity Error: %s\n", ex.what());
 				return;
 			}
-			catch(tf::ExtrapolationException& ex)
+			catch(tf2::ExtrapolationException& ex)
 			{
 				ROS_ERROR("Extrapolation Error: %s\n", ex.what());
 				return;

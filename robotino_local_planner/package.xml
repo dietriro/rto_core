@@ -22,6 +22,14 @@
   <run_depend>nav_msgs</run_depend>
   <run_depend>pluginlib</run_depend>
   <run_depend>tf</run_depend>
+
+  <build_depend>tf2_geometry_msgs</build_depend>
+  <build_depend>tf2_ros</build_depend>
+  <build_depend>tf2_sensor_msgs</build_depend>
+
+  <run_depend>tf2_geometry_msgs</run_depend>
+  <run_depend>tf2_ros</run_depend>
+  <run_depend>tf2_sensor_msgs</run_depend>
   <!-- The export tag contains other, unspecified, tags -->
   <export>
     <!-- You can specify that this package is a metapackage here: -->

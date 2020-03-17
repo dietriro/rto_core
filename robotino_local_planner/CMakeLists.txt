@@ -11,6 +11,9 @@ find_package(catkin REQUIRED COMPONENTS
   nav_msgs
   pluginlib
   tf
+  tf2_geometry_msgs
+  tf2_ros
+  tf2_sensor_msgs
 )
 
 ## System dependencies are found with CMake's conventions
@@ -85,7 +88,16 @@ find_package(catkin REQUIRED COMPONENTS
 catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES robotino_local_planner
-#  CATKIN_DEPENDS costmap_2d geometry_msgs nav_core nav_msgs pluginlib tf
+ CATKIN_DEPENDS 
+    costmap_2d 
+    geometry_msgs 
+    nav_core 
+    nav_msgs 
+    pluginlib 
+    tf 
+    tf2_geometry_msgs
+    tf2_ros
+    tf2_sensor_msgs
 #  DEPENDS system_lib
 )
 
