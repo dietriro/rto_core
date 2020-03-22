@@ -1,0 +1,36 @@
+<launch>
+    <!-- <arg name="robot_ip" default="10.42.0.5" /> -->
+    <!-- <arg name="max_linear_velocity" default="0.3" /> -->
+    <arg name="sensor_laser" default="true" />
+    <arg name="sensor_3dcam" default="false" />
+    <arg name="depth2scan" default="false"/>
+    <arg name="depth2scan_topic_pub" default="depth_to_scan"/>
+    
+    <param name="robot_description" textfile="$(find robotino_description)/urdf/robotino.urdf" />
+    
+    <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher" output="screen">
+    	<param name="publish_frequency" type="double" value="20.0" />
+  	</node>
+
+    <group if="$(arg sensor_laser)">
+        <node pkg="tf" type="static_transform_publisher" name="static_tf_laser" args="0.065 0 0.2015 0 0 0 base_link laser 100" />
+        <node pkg="urg_node" type="urg_node" name="urg_node" />        
+    </group>
+
+    <group if="$(arg sensor_3dcam)">
+        <node pkg="tf" type="static_transform_publisher" name="static_tf_3dcam" args="0.065 0.03 0.346 0.04 0 0 base_link camera_link 100" />
+        <include file="$(find openni2_launch)/launch/openni2.launch" />
+
+        <group if="$(arg depth2scan)">
+            <node pkg="depthimage_to_laserscan" type="depthimage_to_laserscan" name="depthimage_to_laserscan" output="log" respawn="false" respawn_delay="0">
+                <param name="scan_time" value="0.1"/>
+                <param name="range_min" value="0.02"/>
+                <param name="range_max" value="5.6"/>
+                <remap from="image" to="/camera/depth/image_raw"/>
+                <remap from="scan" to="$(arg depth2scan_topic_pub)"/>
+            </node>            
+        </group>
+    </group>
+
+
+</launch>
