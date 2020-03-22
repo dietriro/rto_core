@@ -1,10 +1,19 @@
+<?xml version="1.0"?>
+
 <launch>
-  <node name="slam_gmapping" pkg="gmapping" type="slam_gmapping">
-    <param name="xmin" value="-20" />
-    <param name="xmax" value="20" />
-    <param name="ymin" value="-20" />
-    <param name="ymax" value="20" />
-  </node>
-  <!-- Run rviz -->
-  <include file="$(find robotino_navigation)/launch/rviz.launch" />
+    <arg name="sensor_laser" default="true" />
+    <arg name="sensor_3dcam" default="false" />
+
+    <include file="$(find robotino_node)/launch/robot_simple.launch">
+        <arg name="sensor_laser" default="$(arg sensor_laser)"/>
+        <arg name="sensor_3dcam" default="$(arg sensor_3dcam)"/>
+    </include>
+
+    <node pkg="gmapping" type="slam_gmapping" name="rto_gmapping">
+        <param name="xmin" value="-20" />
+        <param name="xmax" value="20" />
+        <param name="ymin" value="-20" />
+        <param name="ymax" value="20" />
+    </node>
+
 </launch>

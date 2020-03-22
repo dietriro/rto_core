@@ -1,29 +1,40 @@
 <launch>
-  <arg name="map_file" />
+    <arg name="robot_env" default="$(optenv ROBOT_ENV sample)"/>
+    <arg name="safety" default="false"/>
 
-  <!--- Run mapserver -->
-  <include file="$(find robotino_navigation)/launch/map_server.launch">
-    <arg name="map_file" value="$(arg map_file)" />
-  </include>
+    <!-- Specify enabled sensors -->
+    <arg name="sensor_laser" default="true" />
+    <arg name="sensor_3dcam" default="false" />
 
-  <!--- Run AMCL -->
-  <include file="$(find amcl)/examples/amcl_omni.launch" />
+    <!-- Run Robotino with simple config -->
+    <include file="$(find robotino_node)/launch/robot_simple.launch">
+        <arg name="sensor_laser" default="$(arg sensor_laser)"/>
+        <arg name="sensor_3dcam" default="$(arg sensor_3dcam)"/>
+    </include>
 
-  <!--- Run move_base -->
-  <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
-    <rosparam file="$(find robotino_navigation)/config/costmap_common_params.yaml" command="load" ns="global_costmap" />
-    <rosparam file="$(find robotino_navigation)/config/costmap_common_params.yaml" command="load" ns="local_costmap" />
-    <rosparam file="$(find robotino_navigation)/config/local_costmap_params.yaml" command="load" />
-    <rosparam file="$(find robotino_navigation)/config/global_costmap_params.yaml" command="load" />
-    <rosparam file="$(find robotino_navigation)/config/base_local_planner_params.yaml" command="load" />
-    <param name="base_local_planner" value="robotino_local_planner/RobotinoLocalPlanner" />
-    <param name="controller_frequency" value="15.0" />
-    <remap from="cmd_vel" to="robotino_cmd_vel" />
-  </node>
+    <!-- Run mapserver -->
+    <include file="$(find robotino_navigation)/launch/map_server.launch">
+        <arg name="map_file" value="$(find robotino_navigation)/maps/$(arg robot_env).yaml" />
+    </include>
 
-  <!-- Run rviz -->
-  <include file="$(find robotino_navigation)/launch/rviz.launch"/>
+    <!-- Run AMCL -->
+    <include file="$(find amcl)/examples/amcl_omni.launch" />
 
-  <!-- Run robotino_safety_node -->
-  <include file="$(find robotino_safety)/launch/robotino_safety_node.launch"/>
+    <!-- Run move_base -->
+    <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
+        <rosparam file="$(find robotino_navigation)/config/costmap_common_params.yaml" command="load" ns="global_costmap" />
+        <rosparam file="$(find robotino_navigation)/config/costmap_common_params.yaml" command="load" ns="local_costmap" />
+        <rosparam file="$(find robotino_navigation)/config/local_costmap_params.yaml" command="load" />
+        <rosparam file="$(find robotino_navigation)/config/global_costmap_params.yaml" command="load" />
+        <rosparam file="$(find robotino_navigation)/config/base_local_planner_params.yaml" command="load" />
+        <!-- TODO: Exchange base local planner: it is not replanning -->
+        <param name="base_local_planner" value="robotino_local_planner/RobotinoLocalPlanner" />
+        <param name="controller_frequency" value="15.0" />
+        <!-- <remap from="cmd_vel" to="robotino_cmd_vel" /> -->
+    </node>
+
+    <!-- Run robotino_safety_node -->
+    <group if="$(arg safety)">
+        <include file="$(find robotino_safety)/launch/robotino_safety_node.launch"/>    
+    </group>
 </launch>
