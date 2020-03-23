@@ -10,26 +10,33 @@
   <author email="verbeek@servicerobotics.eu">Christian Verbeek</author>
   <!-- The *_depend tags are used to specify dependencies -->
   <buildtool_depend>catkin</buildtool_depend>
+
   <build_depend>costmap_2d</build_depend>
   <build_depend>geometry_msgs</build_depend>
   <build_depend>nav_core</build_depend>
   <build_depend>nav_msgs</build_depend>
   <build_depend>pluginlib</build_depend>
   <build_depend>tf</build_depend>
+  <build_depend>tf2_geometry_msgs</build_depend>
+  <build_depend>tf2_ros</build_depend>
+  <build_depend>tf2_sensor_msgs</build_depend>
+  <build_depend>std_msgs</build_depend>
+  <build_depend>tf2</build_depend>
+  <build_depend>visualization_msgs</build_depend>
+
   <run_depend>costmap_2d</run_depend>
   <run_depend>geometry_msgs</run_depend>
   <run_depend>nav_core</run_depend>
   <run_depend>nav_msgs</run_depend>
   <run_depend>pluginlib</run_depend>
   <run_depend>tf</run_depend>
-
-  <build_depend>tf2_geometry_msgs</build_depend>
-  <build_depend>tf2_ros</build_depend>
-  <build_depend>tf2_sensor_msgs</build_depend>
-
   <run_depend>tf2_geometry_msgs</run_depend>
   <run_depend>tf2_ros</run_depend>
   <run_depend>tf2_sensor_msgs</run_depend>
+  <run_depend>std_msgs</run_depend>
+  <run_depend>tf2</run_depend>
+  <run_depend>visualization_msgs</run_depend>
+
   <!-- The export tag contains other, unspecified, tags -->
   <export>
     <!-- You can specify that this package is a metapackage here: -->

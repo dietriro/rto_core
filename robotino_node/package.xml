@@ -10,12 +10,21 @@
   <author email="verbeek@servicerobotics.eu">Christian Verbeek</author>
   <!-- The *_depend tags are used to specify dependencies -->
   <buildtool_depend>catkin</buildtool_depend>
+
   <build_depend>image_transport</build_depend>
   <build_depend>nav_msgs</build_depend>
   <build_depend>robotino_msgs</build_depend>
   <build_depend>tf</build_depend>
+  <build_depend>geometry_msgs</build_depend>
+  <build_depend>sensor_msgs</build_depend>
+  <build_depend>std_msgs</build_depend>
+
   <run_depend>image_transport</run_depend>
   <run_depend>nav_msgs</run_depend>
   <run_depend>robotino_msgs</run_depend>
   <run_depend>tf</run_depend>
+  <run_depend>geometry_msgs</run_depend>
+  <run_depend>sensor_msgs</run_depend>
+  <run_depend>std_msgs</run_depend>
+
 </package>
