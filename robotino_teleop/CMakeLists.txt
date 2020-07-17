@@ -9,7 +9,8 @@ find_package(catkin REQUIRED COMPONENTS
   robotino_node
   sensor_msgs roscpp roslib
 )
-set(CMAKE_MODULE_PATH /usr/local/robotino/api2/cmake)
+
+list(APPEND CMAKE_MODULE_PATH "/usr/local/robotino/api2/cmake" "/opt/robotino/cmake")
 
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
