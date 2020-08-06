@@ -31,29 +31,28 @@
             </collision>
         </link>
         <gazebo reference="base_link">
-            <material>Gazebo/White</material>
             <turnGravityOff>false</turnGravityOff>
         </gazebo>
         <!-- wheels -->
-        <wheel name="wheel0" parent="base_link">
+        <xacro:wheel name="wheel0" parent="base_link">
             <origin xyz="0.065 0.11 0.04" rpy="0 0 ${M_PI/3}"/>
             <axis xyz="-1 0 0"/>
-        </wheel>
-        <wheel name="wheel1" parent="base_link">
+        </xacro:wheel >
+        <xacro:wheel  name="wheel1" parent="base_link">
             <origin xyz="-0.13 0 0.04" rpy="0 0 0"/>
             <axis xyz="1 0 0"/>
-        </wheel>
-        <wheel name="wheel2" parent="base_link">
+        </xacro:wheel >
+        <xacro:wheel  name="wheel2" parent="base_link">
             <origin xyz="0.065 -0.11 0.04" rpy="0 0 -${M_PI/3}"/>
             <axis xyz="-1 0 0"/>
-        </wheel>
+        </xacro:wheel >
         <!-- others -->
-        <command_bridge name="command_bridge" parent="base_link">
+        <xacro:command_bridge name="command_bridge" parent="base_link">
             <origin xyz="-0.05 0 0.13" rpy="0 0 ${M_PI/2}"/>
-        </command_bridge>
-        <anglebracketusb name="anglebracketusb" parent="base_link">
+        </xacro:command_bridge>
+        <!-- <xacro:anglebracketusb name="anglebracketusb" parent="base_link">
             <origin xyz="0.008 0 0.137" rpy="0 0 ${M_PI/2}"/>
-        </anglebracketusb>
+        </xacro:anglebracketusb> -->
         <!-- gazebo control -->
         <gazebo>
             <plugin name="object_controller" filename="libgazebo_ros_planar_move.so">
@@ -62,6 +61,7 @@
                 <odometryFrame>odom</odometryFrame>
                 <odometryRate>20</odometryRate>
                 <robotBaseFrame>base_link</robotBaseFrame>
+                <publishTF>true</publishTF>
             </plugin>
             <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so"/>
         </gazebo>
