@@ -1,16 +1,6 @@
 <launch>
-    <arg name="robot_env" default="$(optenv ROBOT_ENV sample)"/>
-    <arg name="safety" default="false"/>
-
-    <!-- Specify enabled sensors -->
-    <arg name="sensor_laser" default="true" />
-    <arg name="sensor_3dcam" default="false" />
-
-    <!-- Run Robotino with simple config -->
-    <include file="$(find robotino_node)/launch/robot_simple.launch">
-        <arg name="sensor_laser" default="$(arg sensor_laser)"/>
-        <arg name="sensor_3dcam" default="$(arg sensor_3dcam)"/>
-    </include>
+    <arg name="robot_env" default="$(optenv ROBOT_ENV sim_simple)"/>
+    <arg name="safety" default="true"/>
 
     <!-- Run mapserver -->
     <include file="$(find robotino_navigation)/launch/map_server.launch">
@@ -27,7 +17,7 @@
         <rosparam file="$(find robotino_navigation)/config/local_costmap_params.yaml" command="load" />
         <rosparam file="$(find robotino_navigation)/config/global_costmap_params.yaml" command="load" />
         <rosparam file="$(find robotino_navigation)/config/base_local_planner_params.yaml" command="load" />
-        <!-- TODO: Exchange base local planner: it is not replanning -->
+        <!-- TODO: Probably exchange base local planner -->
         <param name="base_local_planner" value="robotino_local_planner/RobotinoLocalPlanner" />
         <param name="controller_frequency" value="15.0" />
         <!-- <remap from="cmd_vel" to="robotino_cmd_vel" /> -->

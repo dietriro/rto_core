@@ -18,7 +18,7 @@
     </group>
 
     <group if="$(arg sensor_3dcam)">
-        <node pkg="tf" type="static_transform_publisher" name="static_tf_3dcam" args="0.065 0.03 0.346 0.04 0 0 base_link camera_link 100" />
+        <node pkg="tf" type="static_transform_publisher" name="static_tf_3dcam" args="0.065 0.03 0.293 0.04 0 0 base_link camera_link 100" />
         <include file="$(find openni2_launch)/launch/openni2.launch" />
 
         <group if="$(arg depth2scan)">
