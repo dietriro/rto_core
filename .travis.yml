@@ -70,17 +70,17 @@ env:
 before_install:
   - sudo sh -c "echo \"deb http://packages.ros.org/ros/ubuntu $ROS_CI_DESKTOP main\" > /etc/apt/sources.list.d/ros-latest.list"
   - sudo apt-key adv --keyserver 'hkp://keyserver.ubuntu.com:80' --recv-key C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654
+  - wget -qO - http://packages.openrobotino.org/keyFile | sudo apt-key add -
+  - sudo sh -c "echo \"deb http://packages2.openrobotino.org focal main\" > /etc/apt/sources.list.d/openrobotino.list"
   - sudo apt-get update -qq
-  - sudo apt-get install dpkg
-  - sudo apt-get install -y python3-catkin-pkg python3-rosdep python-wstool ros-$ROS_DISTRO-ros-base
+  - sudo apt-get install -y dpkg rec-rpc robotino-dev robotino-api2 
+  - sudo apt-get install -y python3-catkin-tools python3-catkin-pkg python3-rosdep python3-wstool ros-$ROS_DISTRO-ros-base
   - source /opt/ros/$ROS_DISTRO/setup.bash
   # Prepare rosdep to install dependencies.
   - sudo rosdep init
-  - rosdep update --include-eol-distros  # Support EOL distros.
-  - sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu `lsb_release -sc` main" > /etc/apt/sources.list.d/ros-latest.list'
-  - wget http://packages.ros.org/ros.key -O - | sudo apt-key add -
-  - sudo apt-get update
-  - sudo apt-get install python-catkin-tools
+  - rosdep update
+#   - sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu `lsb_release -sc` main" > /etc/apt/sources.list.d/ros-latest.list'
+#   - wget http://packages.ros.org/ros.key -O - | sudo apt-key add -
 
 # Create a catkin workspace with the package under integration.
 install:

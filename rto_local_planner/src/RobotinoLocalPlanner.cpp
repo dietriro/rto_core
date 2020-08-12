@@ -5,7 +5,7 @@
  *      Author: indorewala@servicerobotics.eu
  */
 
-#include <rto_local_planner/RobotinoLocalPlanner.h>
+#include <RobotinoLocalPlanner.h>
 #include <pluginlib/class_list_macros.h>
 #include <cmath>
 
