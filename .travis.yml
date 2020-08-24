@@ -49,7 +49,9 @@ matrix:
   include:
   - name: "Focal noetic"
     dist: focal
-    env: ROS_DISTRO=noetic
+    env: 
+    - ROS_DISTRO=noetic 
+    - ROS_OS=ubuntu:focal
 
 # Configuration variables. All variables are global now, but this can be used to
 # trigger a build matrix for different ROS distributions if desired.
@@ -107,7 +109,7 @@ before_script:
   - wstool up
   # package depdencies: install using rosdep.
   - cd ~/catkin_ws
-  - rosdep install -y --from-paths src --ignore-src --rosdistro $ROS_DISTRO --os=ubuntu:focal
+  - rosdep install -y --from-paths src --ignore-src --rosdistro $ROS_DISTRO --os=$ROS_OS
 
 # Compile and test (mark the build as failed if any step fails). If the
 # CATKIN_OPTIONS file exists, use it as an argument to catkin_make, for example
@@ -124,4 +126,4 @@ script:
   - catkin build
   # Run the tests, ensuring the path is set correctly.
   - source devel/setup.bash
-  - catkin_make run_tests && catkin_test_results
+  - catkin run_tests && catkin_test_results
