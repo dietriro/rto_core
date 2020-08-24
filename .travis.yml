@@ -74,7 +74,8 @@ before_install:
   - sudo sh -c "echo \"deb http://packages2.openrobotino.org focal main\" > /etc/apt/sources.list.d/openrobotino.list"
   - sudo apt-get update -qq
   - sudo apt-get install -y dpkg rec-rpc robotino-dev robotino-api2 
-  - sudo apt-get install -y python3-catkin-tools python3-catkin-pkg python3-rosdep python3-wstool ros-$ROS_DISTRO-ros-base
+  - sudo apt-get install -y python3-catkin-pkg python3-rosdep python3-wstool ros-$ROS_DISTRO-ros-base
+  - pip3 install --user git+https://github.com/catkin/catkin_tools.git
   - source /opt/ros/$ROS_DISTRO/setup.bash
   # Prepare rosdep to install dependencies.
   - sudo rosdep init
