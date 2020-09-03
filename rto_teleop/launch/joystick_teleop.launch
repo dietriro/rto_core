@@ -1,4 +1,7 @@
 <launch>
+	<arg name="max_linear_velocity" default="0.3"/>
+	<arg name="max_angular_velocity" default="0.6"/>
+
 	<!-- joy node -->
 	<node respawn="true" pkg="joy" type="joy_node" name="robotino_joy" output="screen">
 		<param name="dev" type="string" value="/dev/input/js0" />
@@ -11,10 +14,11 @@
 		<!-- Axes -->
 		<param name="axis_linear_x" value="1" type="int" />
 		<param name="axis_linear_y" value="0" type="int" />
-		<param name="axis_angular" value="2" type="int" />
+		<param name="axis_angular" value="3" type="int" />
 		
 		<!-- Scale -->
-		<param name="scale_linear" value="0.1" type="double" />
-		<param name="scale_angular" value="0.2" type="double" />
+		<param name="scale_linear" value="$(arg max_linear_velocity)" type="double" />
+		<param name="scale_angular" value="$(arg max_angular_velocity)" type="double" />
+		<param name="scale_turbo" value="2.0" type="double" />
 	</node>
 </launch>

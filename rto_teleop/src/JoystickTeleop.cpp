@@ -26,10 +26,10 @@ void JoystickTeleop::readParams( ros::NodeHandle& n)
 {
 	n.param<int>("axis_linear_x", axis_linear_x_, 1);
 	n.param<int>("axis_linear_y", axis_linear_y_, 0);
-	n.param<int>("axis_angular", axis_angular_, 2);
-	n.param<double>("scale_linear", scale_linear_, 0.1);
-	n.param<double>("scale_angular", scale_angular_, 0.2);
-
+	n.param<int>("axis_angular", axis_angular_, 3);
+	n.param<double>("scale_linear", scale_linear_, 0.3);
+	n.param<double>("scale_angular", scale_angular_, 0.6);
+	n.param<double>("scale_turbo", scale_turbo_, 2.0);
 }
 
 void JoystickTeleop::joyCallback( const sensor_msgs::JoyConstPtr& msg)
@@ -40,9 +40,24 @@ void JoystickTeleop::joyCallback( const sensor_msgs::JoyConstPtr& msg)
 		return;
 	}
 
-	cmd_vel_msg_.linear.x = msg->axes[axis_linear_x_] * scale_linear_;
-	cmd_vel_msg_.linear.y = msg->axes[axis_linear_y_] * scale_linear_;
-	cmd_vel_msg_.angular.z = msg->axes[axis_angular_] * scale_angular_;
+	// Set turbo to 2 if button 'LB' is pressed, 1 otherwise
+	float turbo = 1.0;
+	if (msg->buttons[4] == 1)
+		turbo = scale_turbo_;
+
+	// Use input only if button 'RB' is pressed otherwise set everything to zero 
+	if (msg->buttons[5] == 1)
+	{
+		cmd_vel_msg_.linear.x = msg->axes[axis_linear_x_] * scale_linear_ * turbo;
+		cmd_vel_msg_.linear.y = msg->axes[axis_linear_y_] * scale_linear_ * turbo;
+		cmd_vel_msg_.angular.z = msg->axes[axis_angular_] * scale_angular_ * turbo;
+	}
+	else
+	{
+		cmd_vel_msg_.linear.x = 0;
+		cmd_vel_msg_.linear.y = 0;
+		cmd_vel_msg_.angular.z = 0;
+	}
 }
 
 void JoystickTeleop::spin()

@@ -35,6 +35,7 @@ private:
 	int axis_angular_;
 	double scale_linear_;
 	double scale_angular_;
+	double scale_turbo_;
 
 public:
 	void spin();
