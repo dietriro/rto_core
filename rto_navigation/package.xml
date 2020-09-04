@@ -14,11 +14,11 @@
   
   <build_depend>rto_node</build_depend>
 
-  <run_depend>rto_node</run_depend>
-  <run_depend>rto_safety</run_depend>
-  <run_depend>slam_toolbox</run_depend>
-  <run_depend>map_server</run_depend>
-  <run_depend>move_base</run_depend>
-  <run_depend>amcl</run_depend>
+  <exec_depend>rto_node</exec_depend>
+  <exec_depend>rto_safety</exec_depend>
+  <exec_depend>slam_toolbox</exec_depend>
+  <exec_depend>map_server</exec_depend>
+  <exec_depend>move_base</exec_depend>
+  <exec_depend>amcl</exec_depend>
 
 </package>

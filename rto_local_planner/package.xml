@@ -24,18 +24,18 @@
   <build_depend>tf2</build_depend>
   <build_depend>visualization_msgs</build_depend>
 
-  <run_depend>costmap_2d</run_depend>
-  <run_depend>geometry_msgs</run_depend>
-  <run_depend>nav_core</run_depend>
-  <run_depend>nav_msgs</run_depend>
-  <run_depend>pluginlib</run_depend>
-  <run_depend>tf</run_depend>
-  <run_depend>tf2_geometry_msgs</run_depend>
-  <run_depend>tf2_ros</run_depend>
-  <run_depend>tf2_sensor_msgs</run_depend>
-  <run_depend>std_msgs</run_depend>
-  <run_depend>tf2</run_depend>
-  <run_depend>visualization_msgs</run_depend>
+  <exec_depend>costmap_2d</exec_depend>
+  <exec_depend>geometry_msgs</exec_depend>
+  <exec_depend>nav_core</exec_depend>
+  <exec_depend>nav_msgs</exec_depend>
+  <exec_depend>pluginlib</exec_depend>
+  <exec_depend>tf</exec_depend>
+  <exec_depend>tf2_geometry_msgs</exec_depend>
+  <exec_depend>tf2_ros</exec_depend>
+  <exec_depend>tf2_sensor_msgs</exec_depend>
+  <exec_depend>std_msgs</exec_depend>
+  <exec_depend>tf2</exec_depend>
+  <exec_depend>visualization_msgs</exec_depend>
 
   <!-- The export tag contains other, unspecified, tags -->
   <export>

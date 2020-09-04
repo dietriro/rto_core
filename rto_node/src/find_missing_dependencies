@@ -55,7 +55,7 @@ done
 echo ""
 
 for missing_pkg in $choices; do
-    echo "<run_depend>${missing_pkg}</run_depend>"
+    echo "<exec_depend>${missing_pkg}</exec_depend>"
 done
 
 echo ""

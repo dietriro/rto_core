@@ -19,12 +19,12 @@
   <build_depend>sensor_msgs</build_depend>
   <build_depend>std_msgs</build_depend>
 
-  <run_depend>image_transport</run_depend>
-  <run_depend>nav_msgs</run_depend>
-  <run_depend>rto_msgs</run_depend>
-  <run_depend>tf</run_depend>
-  <run_depend>geometry_msgs</run_depend>
-  <run_depend>sensor_msgs</run_depend>
-  <run_depend>std_msgs</run_depend>
+  <exec_depend>image_transport</exec_depend>
+  <exec_depend>nav_msgs</exec_depend>
+  <exec_depend>rto_msgs</exec_depend>
+  <exec_depend>tf</exec_depend>
+  <exec_depend>geometry_msgs</exec_depend>
+  <exec_depend>sensor_msgs</exec_depend>
+  <exec_depend>std_msgs</exec_depend>
 
 </package>

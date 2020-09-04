@@ -16,8 +16,8 @@
   <build_depend>rto_node</build_depend>
   <build_depend>sensor_msgs</build_depend>
 
-  <run_depend>geometry_msgs</run_depend>
-  <run_depend>rto_node</run_depend>
-  <run_depend>sensor_msgs</run_depend>
-  <run_depend>joy</run_depend>
+  <exec_depend>geometry_msgs</exec_depend>
+  <exec_depend>rto_node</exec_depend>
+  <exec_depend>sensor_msgs</exec_depend>
+  <exec_depend>joy</exec_depend>
 </package>
