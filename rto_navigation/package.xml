@@ -8,8 +8,17 @@
   <license>BSD</license>
   <url type="website">http://wiki.ros.org/rto_navigation</url>
   <author email="verbeek@servicerobotics.eu">Christian Verbeek</author>
+  
   <!-- The *_depend tags are used to specify dependencies -->
   <buildtool_depend>catkin</buildtool_depend>
+  
   <build_depend>rto_node</build_depend>
+
   <run_depend>rto_node</run_depend>
+  <run_depend>rto_safety</run_depend>
+  <run_depend>slam_toolbox</run_depend>
+  <run_depend>map_server</run_depend>
+  <run_depend>move_base</run_depend>
+  <run_depend>amcl</run_depend>
+
 </package>

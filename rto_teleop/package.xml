@@ -8,12 +8,16 @@
   <license>BSD</license>
   <url type="website">http://wiki.ros.org/rto_teleop</url>
   <author email="verbeek@servicerobotics.eu">Christian Verbeek</author>
+  
   <!-- The *_depend tags are used to specify dependencies -->
   <buildtool_depend>catkin</buildtool_depend>
+
   <build_depend>geometry_msgs</build_depend>
   <build_depend>rto_node</build_depend>
   <build_depend>sensor_msgs</build_depend>
+
   <run_depend>geometry_msgs</run_depend>
   <run_depend>rto_node</run_depend>
   <run_depend>sensor_msgs</run_depend>
+  <run_depend>joy</run_depend>
 </package>
