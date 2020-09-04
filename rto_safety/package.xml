@@ -1,4 +1,4 @@
-<package>
+<package format="2">
   <name>rto_safety</name>
   <version>0.1.0</version>
   <description>The rto_safety package</description>
