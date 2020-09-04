@@ -1,24 +1,10 @@
 <?xml version="1.0"?>
 
 <launch>
-    <arg name="sensor_laser" default="true" />
-    <arg name="sensor_3dcam" default="false" />
-
-    <!-- <include file="$(find rto_node)/launch/robot_simple.launch">
-        <arg name="sensor_laser" default="$(arg sensor_laser)"/>
-        <arg name="sensor_3dcam" default="$(arg sensor_3dcam)"/>
-    </include> -->
-
-    <!-- <node pkg="gmapping" type="slam_gmapping" name="rto_gmapping">
+    <node pkg="gmapping" type="slam_gmapping" name="rto_gmapping">
         <param name="xmin" value="-20" />
         <param name="xmax" value="20" />
         <param name="ymin" value="-20" />
         <param name="ymax" value="20" />
-    </node> -->
-
-    <node pkg="slam_toolbox" type="sync_slam_toolbox_node" name="slam_toolbox" output="screen">
-        <rosparam command="load" file="$(find rto_navigation)/config/mapper_params_online_sync.yaml" />
     </node>
-
-
 </launch>
