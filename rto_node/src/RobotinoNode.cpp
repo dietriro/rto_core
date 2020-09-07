@@ -17,7 +17,7 @@ RobotinoNode::RobotinoNode()
 	nh_.param<double>("min_angular_vel", min_angular_vel_, 0.1 );
 
 	distances_clearing_pub_ = nh_.advertise<sensor_msgs::PointCloud>("/distance_sensors_clearing", 1, true);
-	joint_states_pub_= nh_.advertise<sensor_msgs::JointState>("/robotino_joint_states", 1, false);
+	joint_states_pub_= nh_.advertise<sensor_msgs::JointState>("/rto_joint_states", 1, false);
 
 	com_.setName( "RobotinoNode" );
 

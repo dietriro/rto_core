@@ -27,8 +27,8 @@ RobotinoSafety::RobotinoSafety():
 	e1_viz_pub_ = nh_.advertise<visualization_msgs::Marker>("inner_ellipse_marker", 10);
 	e2_viz_pub_ = nh_.advertise<visualization_msgs::Marker>("outer_ellipse_marker", 10);
 
-	robotino_cmd_vel_sub_ = nh_.subscribe("/robotino_cmd_vel", 1,
-			&RobotinoSafety::robotinoCmdVelCallback, this);
+	rto_cmd_vel_sub_ = nh_.subscribe("/rto_cmd_vel", 1,
+			&RobotinoSafety::rtoCmdVelCallback, this);
 	bumper_sub_ = nh_.subscribe("/bumper", 1, &RobotinoSafety::bumperCallback, this);
 	scan_sub_ = nh_.subscribe("/scan", 1, &RobotinoSafety::scanCallback, this);
 
@@ -45,7 +45,7 @@ RobotinoSafety::RobotinoSafety():
 RobotinoSafety::~RobotinoSafety()
 {
 	cmd_vel_pub_.shutdown();
-	robotino_cmd_vel_sub_.shutdown();
+	rto_cmd_vel_sub_.shutdown();
 	bumper_sub_.shutdown();
 	scan_sub_.shutdown();
 }
@@ -110,7 +110,7 @@ void RobotinoSafety::buildEllipseVizMsgs()
 	}
 }
 
-void RobotinoSafety::robotinoCmdVelCallback(const geometry_msgs::TwistConstPtr& msg)
+void RobotinoSafety::rtoCmdVelCallback(const geometry_msgs::TwistConstPtr& msg)
 {
 	cmd_vel_msg_.linear.x = ( dist_ / scale_ ) * msg->linear.x;
 	cmd_vel_msg_.linear.y = ( dist_ / scale_ ) *msg->linear.y;

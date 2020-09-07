@@ -18,7 +18,7 @@
             <visual>
                 <origin xyz="0 0 0" rpy="0 0 0"/>
                 <geometry>
-                    <mesh filename="package://rto_description/meshes/parts/robotino_wheel.dae" scale="${M_SCALE} ${M_SCALE} ${M_SCALE}"/>
+                    <mesh filename="package://rto_description/meshes/parts/rto_wheel.dae" scale="${M_SCALE} ${M_SCALE} ${M_SCALE}"/>
                 </geometry>
             </visual>
         </link>

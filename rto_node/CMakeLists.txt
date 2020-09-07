@@ -141,50 +141,50 @@ target_link_libraries(
 
 
 add_executable(
-  robotino_odometry_node
-  src/robotino_odometry_node.cpp
+  rto_odometry_node
+  src/rto_odometry_node.cpp
   src/ComROS.cpp
   src/OdometryROS.cpp
   src/RobotinoOdometryNode.cpp
 )
 
 target_link_libraries(
-  robotino_odometry_node
+  rto_odometry_node
   ${REC_ROBOTINO_API2_LIBRARY}
   ${catkin_LIBRARIES}
 )
 
 add_executable(
-  robotino_laserrangefinder_node
-  src/robotino_laserrangefinder_node.cpp
+  rto_laserrangefinder_node
+  src/rto_laserrangefinder_node.cpp
   src/ComROS.cpp
   src/LaserRangeFinderROS.cpp
   src/RobotinoLaserRangeFinderNode.cpp
 )
 
 target_link_libraries(
-  robotino_laserrangefinder_node
+  rto_laserrangefinder_node
   ${REC_ROBOTINO_API2_LIBRARY}
   ${catkin_LIBRARIES}
 )
 
 add_executable(
-  robotino_camera_node
-  src/robotino_camera_node.cpp
+  rto_camera_node
+  src/rto_camera_node.cpp
   src/ComROS.cpp
   src/CameraROS.cpp
   src/RobotinoCameraNode.cpp
 )
 
 target_link_libraries(
-  robotino_camera_node
+  rto_camera_node
   ${REC_ROBOTINO_API2_LIBRARY}
   ${catkin_LIBRARIES}
 )
 
 #add_executable(
-#  robotino_mapping_node
-#  src/robotino_mapping_node.cpp
+#  rto_mapping_node
+#  src/rto_mapping_node.cpp
 #  src/MappingROS.cpp
 #  src/RobotinoMappingNode.cpp
 #  src/InitialPoseROS.cpp
@@ -193,7 +193,7 @@ target_link_libraries(
 #)
 
 #target_link_libraries(
-#  robotino_mapping_node
+#  rto_mapping_node
 #  ${REC_ROBOTINO_API2_LIBRARY}
 #  ${catkin_LIBRARIES}
 #)
@@ -202,7 +202,7 @@ target_link_libraries(
 ## as an example, message headers may need to be generated before nodes
 # add_dependencies(rto_node_node rto_node_generate_messages_cpp)
 add_dependencies(rto_node rto_msgs_generate_messages_cpp)
-add_dependencies(robotino_odometry_node rto_msgs_generate_messages_cpp)
+add_dependencies(rto_odometry_node rto_msgs_generate_messages_cpp)
 
 ## Specify libraries to link a library or executable target against
 # target_link_libraries(rto_node_node

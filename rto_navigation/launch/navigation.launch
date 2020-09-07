@@ -21,7 +21,7 @@
         <!-- TODO: Probably exchange base local planner -->
         <param name="base_local_planner" value="rto_local_planner/RobotinoLocalPlanner" />
         <param name="controller_frequency" value="15.0" />
-        <!-- <remap from="cmd_vel" to="robotino_cmd_vel" /> -->
+        <!-- <remap from="cmd_vel" to="rto_cmd_vel" /> -->
     </node>
 
     <!-- Run rto_safety_node -->

@@ -6,14 +6,14 @@
  */
 
 
-#include "RobotinoOdometryNode.h"
+#include "RobotinoLaserRangeFinderNode.h"
 
 #include <ros/ros.h>
 
 int main(int argc, char** argv)
 {
-	ros::init(argc, argv, "robotino_odometry_node");
-	RobotinoOdometryNode rn;
+	ros::init(argc, argv, "rto_laserrangefinder_node");
+	RobotinoLaserRangeFinderNode rn;
 	rn.spin();
 	return 0;
 }

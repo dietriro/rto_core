@@ -5,8 +5,8 @@
     <xacro:property name="BASE_RADIUS" value="0.18"/>
     <xacro:property name="BASE_HEIGHT" value="0.05"/>
     <xacro:property name="BASE_MASS" value="20"/>
-    <!-- robotino_body -->
-    <xacro:macro name="robotino_body">
+    <!-- rto_body -->
+    <xacro:macro name="rto_body">
         <!-- base_link -->
         <link name="base_link">
             <inertial>
@@ -19,7 +19,7 @@
             <visual>
                 <origin xyz="0.01 0 0" rpy="0 0 ${M_PI/2}"/>
                 <geometry>
-                    <mesh filename="package://rto_description/meshes/parts/robotino_base.dae"
+                    <mesh filename="package://rto_description/meshes/parts/rto_base.dae"
                         scale="${M_SCALE} ${M_SCALE} ${M_SCALE}"/>
                 </geometry>
             </visual>

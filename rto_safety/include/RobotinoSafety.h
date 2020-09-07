@@ -32,7 +32,7 @@ private:
 	ros::Publisher e1_viz_pub_;
 	ros::Publisher e2_viz_pub_;
 
-	ros::Subscriber robotino_cmd_vel_sub_;
+	ros::Subscriber rto_cmd_vel_sub_;
 	ros::Subscriber bumper_sub_;
 	ros::Subscriber scan_sub_;
 
@@ -55,7 +55,7 @@ private:
 	void calcScale();
 	void buildEllipseVizMsgs();
 
-	void robotinoCmdVelCallback(const geometry_msgs::TwistConstPtr& msg);
+	void rtoCmdVelCallback(const geometry_msgs::TwistConstPtr& msg);
 	void bumperCallback(const std_msgs::BoolConstPtr& msg);
 	void scanCallback(const sensor_msgs::LaserScanConstPtr& msg);
 
