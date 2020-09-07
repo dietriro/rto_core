@@ -5,13 +5,13 @@
  *      Author: indorewala@servicerobotics.eu
  */
 
-#include "RobotinoSafety.h"
+#include "RTOSafety.h"
 
 int main(int argc, char** argv)
 {
 	ros::init(argc, argv, "rto_safety_node");
 
-	RobotinoSafety rs;
+	RTOSafety rs;
 	rs.spin();
 
 	return 0;

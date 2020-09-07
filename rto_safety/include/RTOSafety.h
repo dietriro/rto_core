@@ -1,5 +1,5 @@
 /*
- * RobotinoSafety.h
+ * RTOSafety.h
  *
  *  Created on: Mar 21, 2012
  *      Author: indorewala@servicerobotics.eu
@@ -17,11 +17,11 @@
 #include <laser_geometry/laser_geometry.h>
 #include <visualization_msgs/Marker.h>
 
-class RobotinoSafety
+class RTOSafety
 {
 public:
-	RobotinoSafety();
-	~RobotinoSafety();
+	RTOSafety();
+	~RTOSafety();
 
 	void spin();
 

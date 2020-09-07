@@ -1,5 +1,5 @@
 /*
- * RobotinoNode.h
+ * RTONode.h
  *
  *  Created on: 09.12.2011
  *      Author: indorewala@servicerobotics.eu
@@ -13,11 +13,11 @@
 
 #include <ros/ros.h>
 
-class RobotinoLaserRangeFinderNode
+class RTOLaserRangeFinderNode
 {
 public:
-	RobotinoLaserRangeFinderNode();
-	~RobotinoLaserRangeFinderNode();
+	RTOLaserRangeFinderNode();
+	~RTOLaserRangeFinderNode();
 
 	bool spin();
 

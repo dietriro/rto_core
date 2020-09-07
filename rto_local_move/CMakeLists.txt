@@ -113,7 +113,7 @@ include_directories(
 add_executable(
     rto_local_move_server_node
     src/rto_local_move_server_node.cpp
-    src/RobotinoLocalMoveServer.cpp)
+    src/RTOLocalMoveServer.cpp)
 
 target_link_libraries(rto_local_move_server_node
     ${catkin_LIBRARIES}
@@ -122,7 +122,7 @@ target_link_libraries(rto_local_move_server_node
 add_executable(
     rto_local_move_client_node
     src/rto_local_move_client_node.cpp
-    src/RobotinoLocalMoveClient.cpp)
+    src/RTOLocalMoveClient.cpp)
 
 target_link_libraries(rto_local_move_client_node
     ${catkin_LIBRARIES}

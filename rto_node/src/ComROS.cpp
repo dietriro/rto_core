@@ -32,13 +32,13 @@ void ComROS::errorEvent( const char* errorString )
 void ComROS::connectedEvent()
 {
 	std::ostringstream os;
-	os << name_ << " connected to Robotino.";
+	os << name_ << " connected to RTO.";
 	ROS_INFO("%s", os.str().c_str() );
 }
 
 void ComROS::connectionClosedEvent()
 {
 	std::ostringstream os;
-	os << name_ << " disconnected from Robotino.";
+	os << name_ << " disconnected from RTO.";
 	ROS_INFO("%s", os.str().c_str() );
 }

@@ -1,5 +1,5 @@
 /*
- * RobotinoLocalMoveClient.h
+ * RTOLocalMoveClient.h
  *
  *  Created on: 13.12.2011
  *      Author: indorewala@servicerobotics.eu
@@ -15,11 +15,11 @@
 
 typedef actionlib::SimpleActionClient<rto_local_move::LocalMoveAction> Client;
 
-class RobotinoLocalMoveClient
+class RTOLocalMoveClient
 {
 public:
-	RobotinoLocalMoveClient();
-	~RobotinoLocalMoveClient();
+	RTOLocalMoveClient();
+	~RTOLocalMoveClient();
 
 private:
 	ros::NodeHandle nh_;

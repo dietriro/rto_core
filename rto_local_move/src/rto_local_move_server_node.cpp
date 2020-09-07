@@ -5,12 +5,12 @@
  *      Author: indorewala@servicerobotics.eu
  */
 
-#include "RobotinoLocalMoveServer.h"
+#include "RTOLocalMoveServer.h"
 
 int main(int argc, char** argv)
 {
 	ros::init(argc, argv, "rto_local_move_server_node");
-	RobotinoLocalMoveServer rlms;
+	RTOLocalMoveServer rlms;
 	rlms.spin();
 
 	return 0;

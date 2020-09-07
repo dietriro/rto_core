@@ -1,14 +1,14 @@
 /*
- * RobotinoNode.cpp
+ * RTONode.cpp
  *
  *  Created on: 09.12.2011
  *      Author: indorewala@servicerobotics.eu
  */
 
-#include "RobotinoLaserRangeFinderNode.h"
+#include "RTOLaserRangeFinderNode.h"
 #include <sstream>
 
-RobotinoLaserRangeFinderNode::RobotinoLaserRangeFinderNode()
+RTOLaserRangeFinderNode::RTOLaserRangeFinderNode()
 	: nh_("~")
 {
 	nh_.param<std::string>("hostname", hostname_, "172.26.1.1" );
@@ -21,11 +21,11 @@ RobotinoLaserRangeFinderNode::RobotinoLaserRangeFinderNode()
 	initModules();
 }
 
-RobotinoLaserRangeFinderNode::~RobotinoLaserRangeFinderNode()
+RTOLaserRangeFinderNode::~RTOLaserRangeFinderNode()
 {
 }
 
-void RobotinoLaserRangeFinderNode::initModules()
+void RTOLaserRangeFinderNode::initModules()
 {
 	com_.setAddress( hostname_.c_str() );
 
@@ -38,7 +38,7 @@ void RobotinoLaserRangeFinderNode::initModules()
 	com_.connectToServer( false );
 }
 
-bool RobotinoLaserRangeFinderNode::spin()
+bool RTOLaserRangeFinderNode::spin()
 {
 	ros::Rate loop_rate( 30 );
 

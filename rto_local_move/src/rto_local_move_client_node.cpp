@@ -5,14 +5,14 @@
  *      Author: indorewala@servicerobotics.eu
  */
 
-#include "RobotinoLocalMoveClient.h"
+#include "RTOLocalMoveClient.h"
 
 #define PI 3.14159
 
 int main(int argc, char** argv)
 {
 	ros::init(argc, argv, "rto_local_move_client_node");
-	RobotinoLocalMoveClient rlmc;
+	RTOLocalMoveClient rlmc;
 	rto_local_move::LocalMoveGoal goal;
 	float max_time;
 

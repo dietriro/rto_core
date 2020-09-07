@@ -1,23 +1,23 @@
 /*
- * RobotinoNode.h
+ * RTONode.h
  *
  *  Created on: 09.12.2011
  *      Author: indorewala@servicerobotics.eu
  */
 
-#ifndef RobotinoCameraNode_H
-#define RobotinoCameraNode_H
+#ifndef RTOCameraNode_H
+#define RTOCameraNode_H
 
 #include "ComROS.h"
 #include "CameraROS.h"
 
 #include <ros/ros.h>
 
-class RobotinoCameraNode
+class RTOCameraNode
 {
 public:
-	RobotinoCameraNode();
-	~RobotinoCameraNode();
+	RTOCameraNode();
+	~RTOCameraNode();
 
 	bool spin();
 
@@ -33,4 +33,4 @@ private:
 	void initModules();
 };
 
-#endif /* RobotinoCameraNode_H */
+#endif /* RTOCameraNode_H */

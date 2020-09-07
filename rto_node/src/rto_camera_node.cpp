@@ -6,14 +6,14 @@
  */
 
 
-#include "RobotinoCameraNode.h"
+#include "RTOCameraNode.h"
 
 #include <ros/ros.h>
 
 int main(int argc, char** argv)
 {
 	ros::init(argc, argv, "rto_camera_node");
-	RobotinoCameraNode rn;
+	RTOCameraNode rn;
 	rn.spin();
 	return 0;
 }

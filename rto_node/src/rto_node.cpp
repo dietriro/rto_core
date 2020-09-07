@@ -8,14 +8,14 @@
 
 #include <sensor_msgs/fill_image.h>
 
-#include "RobotinoNode.h"
+#include "RTONode.h"
 
 #include <ros/ros.h>
 
 int main(int argc, char** argv)
 {
 	ros::init(argc, argv, "rto_node");
-	RobotinoNode rn;
+	RTONode rn;
 	rn.spin();
 	return 0;
 }

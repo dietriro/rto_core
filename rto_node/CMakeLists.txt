@@ -130,7 +130,7 @@ add_executable(
   src/OdometryROS.cpp
   src/OmniDriveROS.cpp
   src/PowerManagementROS.cpp
-  src/RobotinoNode.cpp
+  src/RTONode.cpp
 )
 
 target_link_libraries(
@@ -145,7 +145,7 @@ add_executable(
   src/rto_odometry_node.cpp
   src/ComROS.cpp
   src/OdometryROS.cpp
-  src/RobotinoOdometryNode.cpp
+  src/RTOOdometryNode.cpp
 )
 
 target_link_libraries(
@@ -159,7 +159,7 @@ add_executable(
   src/rto_laserrangefinder_node.cpp
   src/ComROS.cpp
   src/LaserRangeFinderROS.cpp
-  src/RobotinoLaserRangeFinderNode.cpp
+  src/RTOLaserRangeFinderNode.cpp
 )
 
 target_link_libraries(
@@ -173,7 +173,7 @@ add_executable(
   src/rto_camera_node.cpp
   src/ComROS.cpp
   src/CameraROS.cpp
-  src/RobotinoCameraNode.cpp
+  src/RTOCameraNode.cpp
 )
 
 target_link_libraries(
@@ -186,7 +186,7 @@ target_link_libraries(
 #  rto_mapping_node
 #  src/rto_mapping_node.cpp
 #  src/MappingROS.cpp
-#  src/RobotinoMappingNode.cpp
+#  src/RTOMappingNode.cpp
 #  src/InitialPoseROS.cpp
 #  src/NavGoalROS.cpp
 #  src/ComROS.cpp

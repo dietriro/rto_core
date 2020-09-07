@@ -1,5 +1,5 @@
 /*
- * RobotinoLocalMoveServer.h
+ * RTOLocalMoveServer.h
  *
  *  Created on: 13.12.2011
  *      Author: indorewala@servicerobotics.eu
@@ -23,11 +23,11 @@
 typedef actionlib::SimpleActionServer<rto_local_move::LocalMoveAction> Server;
 typedef enum { Idle, Moving, Rotating, Finished } State;
 
-class RobotinoLocalMoveServer
+class RTOLocalMoveServer
 {
 public:
-	RobotinoLocalMoveServer();
-	~RobotinoLocalMoveServer();
+	RTOLocalMoveServer();
+	~RTOLocalMoveServer();
 
 private:
 	ros::NodeHandle nh_;

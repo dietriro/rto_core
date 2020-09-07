@@ -117,8 +117,8 @@ include_directories( include
 #   src/${PROJECT_NAME}/rto_local_planner.cpp
 # )
 add_library(
-  RobotinoLocalPlanner
-  src/RobotinoLocalPlanner.cpp )
+  RTOLocalPlanner
+  src/RTOLocalPlanner.cpp )
 
 ## Declare a cpp executable
 # add_executable(rto_local_planner_node src/rto_local_planner_node.cpp)
@@ -129,7 +129,7 @@ add_library(
 
 
 ## Specify libraries to link a library or executable target against
-target_link_libraries(RobotinoLocalPlanner
+target_link_libraries(RTOLocalPlanner
    ${catkin_LIBRARIES}
 )
 

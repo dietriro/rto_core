@@ -1,14 +1,14 @@
 /*
- * RobotinoNode.cpp
+ * RTONode.cpp
  *
  *  Created on: 09.12.2011
  *      Author: indorewala@servicerobotics.eu
  */
 
-#include "RobotinoCameraNode.h"
+#include "RTOCameraNode.h"
 #include <sstream>
 
-RobotinoCameraNode::RobotinoCameraNode()
+RTOCameraNode::RTOCameraNode()
 	: nh_("~")
 {
 	nh_.param<std::string>("hostname", hostname_, "172.26.1.1" );
@@ -21,11 +21,11 @@ RobotinoCameraNode::RobotinoCameraNode()
 	initModules();
 }
 
-RobotinoCameraNode::~RobotinoCameraNode()
+RTOCameraNode::~RTOCameraNode()
 {
 }
 
-void RobotinoCameraNode::initModules()
+void RTOCameraNode::initModules()
 {
 	com_.setAddress( hostname_.c_str() );
 
@@ -38,7 +38,7 @@ void RobotinoCameraNode::initModules()
 	com_.connectToServer( false );
 }
 
-bool RobotinoCameraNode::spin()
+bool RTOCameraNode::spin()
 {
 	ros::Rate loop_rate( 30 );
 

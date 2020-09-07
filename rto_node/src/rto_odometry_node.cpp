@@ -6,14 +6,14 @@
  */
 
 
-#include "RobotinoOdometryNode.h"
+#include "RTOOdometryNode.h"
 
 #include <ros/ros.h>
 
 int main(int argc, char** argv)
 {
 	ros::init(argc, argv, "rto_odometry_node");
-	RobotinoOdometryNode rn;
+	RTOOdometryNode rn;
 	rn.spin();
 	return 0;
 }

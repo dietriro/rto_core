@@ -1,18 +1,18 @@
 /*
- * RobotinoLocalMoveServer.cpp
+ * RTOLocalMoveServer.cpp
  *
  *  Created on: 14.12.2011
  *      Author: indorewala@servicerobotics.eu
  */
 
-#include "RobotinoLocalMoveServer.h"
+#include "RTOLocalMoveServer.h"
 
 #include <tf/transform_datatypes.h>
 
-RobotinoLocalMoveServer::RobotinoLocalMoveServer():
+RTOLocalMoveServer::RTOLocalMoveServer():
 	nh_("~"),
 	server_ ( nh_, "/local_move",
-		boost::bind( &RobotinoLocalMoveServer::execute, this, _1 ), false ),
+		boost::bind( &RTOLocalMoveServer::execute, this, _1 ), false ),
 	curr_x_( 0.0 ),
 	curr_y_( 0.0 ),
 	curr_phi_( 0.0 ),
@@ -29,7 +29,7 @@ RobotinoLocalMoveServer::RobotinoLocalMoveServer():
 	odom_set_(false )
 {
 	odometry_sub_ = nh_.subscribe( "/odom", 1,
-			&RobotinoLocalMoveServer::odomCallback, this );
+			&RTOLocalMoveServer::odomCallback, this );
 
 	cmd_vel_pub_ = nh_.advertise<geometry_msgs::Twist>("/cmd_vel", 1 );
 
@@ -38,14 +38,14 @@ RobotinoLocalMoveServer::RobotinoLocalMoveServer():
 	readParameters( nh_ );
 }
 
-RobotinoLocalMoveServer::~RobotinoLocalMoveServer()
+RTOLocalMoveServer::~RTOLocalMoveServer()
 {
 	odometry_sub_.shutdown();
 	cmd_vel_pub_.shutdown();
 	server_.shutdown();
 }
 
-void RobotinoLocalMoveServer::odomCallback( const nav_msgs::OdometryConstPtr& msg )
+void RTOLocalMoveServer::odomCallback( const nav_msgs::OdometryConstPtr& msg )
 {
 	curr_x_ = msg->pose.pose.position.x;
 	curr_y_ = msg->pose.pose.position.y;
@@ -81,7 +81,7 @@ void RobotinoLocalMoveServer::odomCallback( const nav_msgs::OdometryConstPtr& ms
 	dist_moved_y_ = dist_moved_y_ * cos( -start_phi_ ) + distance_moved_x_temp * sin( -start_phi_ );
 }
 
-void RobotinoLocalMoveServer::execute( const rto_local_move::LocalMoveGoalConstPtr& goal )
+void RTOLocalMoveServer::execute( const rto_local_move::LocalMoveGoalConstPtr& goal )
 {
 	ros::Rate loop_rate( 10 );
 
@@ -146,18 +146,18 @@ void RobotinoLocalMoveServer::execute( const rto_local_move::LocalMoveGoalConstP
 			"Aborting on the goal because the node has been killed");
 }
 
-void RobotinoLocalMoveServer::setCmdVel( double vx, double vy, double omega )
+void RTOLocalMoveServer::setCmdVel( double vx, double vy, double omega )
 {
 	cmd_vel_msg_.linear.x = vx;
 	cmd_vel_msg_.linear.y = vy;
 	cmd_vel_msg_.angular.z = omega;
 }
 
-void RobotinoLocalMoveServer::spin()
+void RTOLocalMoveServer::spin()
 {
 	ros::Rate loop_rate ( 5 );
 
-	ROS_INFO( "Robotino Local Move Server up and running" );
+	ROS_INFO( "RTO Local Move Server up and running" );
 	while( nh_.ok() )
 	{
 		ros::spinOnce();
@@ -165,7 +165,7 @@ void RobotinoLocalMoveServer::spin()
 	}
 }
 
-void RobotinoLocalMoveServer::controlLoop()
+void RTOLocalMoveServer::controlLoop()
 {
 	setCmdVel( 0, 0, 0);
 	switch( state_ )
@@ -264,7 +264,7 @@ void RobotinoLocalMoveServer::controlLoop()
 	}
 }
 
-bool RobotinoLocalMoveServer::acceptNewGoal( const rto_local_move::LocalMoveGoalConstPtr& goal )
+bool RTOLocalMoveServer::acceptNewGoal( const rto_local_move::LocalMoveGoalConstPtr& goal )
 {
 	if( odom_set_ )
 	{
@@ -304,7 +304,7 @@ bool RobotinoLocalMoveServer::acceptNewGoal( const rto_local_move::LocalMoveGoal
 	}
 }
 
-void RobotinoLocalMoveServer::readParameters( ros::NodeHandle& n)
+void RTOLocalMoveServer::readParameters( ros::NodeHandle& n)
 {
 	double min_forward_vel;
 	n.param( "min_forward_vel", min_forward_vel, 0.05 );
@@ -356,7 +356,7 @@ void RobotinoLocalMoveServer::readParameters( ros::NodeHandle& n)
 	rotation_vel_vector_.push_back( point );
 }
 
-template< typename InputIterator > double RobotinoLocalMoveServer::linearApproximator(
+template< typename InputIterator > double RTOLocalMoveServer::linearApproximator(
 		InputIterator iter, InputIterator end, const double x )
 {
 	double y = 0.0;

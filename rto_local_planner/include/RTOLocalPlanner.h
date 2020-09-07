@@ -1,5 +1,5 @@
 /*
- * RobotinoLocalPlanner.h
+ * RTOLocalPlanner.h
  *
  *  Created on: Feb 20, 2012
  *      Author: indorewala@servicerobotics.eu
@@ -24,11 +24,11 @@
 
 namespace rto_local_planner
 {
-	class RobotinoLocalPlanner: public nav_core::BaseLocalPlanner
+	class RTOLocalPlanner: public nav_core::BaseLocalPlanner
 	{
 	public:
-		RobotinoLocalPlanner();
-		~RobotinoLocalPlanner();
+		RTOLocalPlanner();
+		~RTOLocalPlanner();
 
 		void initialize( std::string name, tf2_ros::Buffer* tf, costmap_2d::Costmap2DROS* costmap_ros );
 		bool computeVelocityCommands( geometry_msgs::Twist& cmd_vel);

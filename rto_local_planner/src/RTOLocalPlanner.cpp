@@ -1,22 +1,22 @@
 /*
- * RobotinoLocalPlanner.cpp
+ * RTOLocalPlanner.cpp
  *
  *  Created on: Feb 20, 2012
  *      Author: indorewala@servicerobotics.eu
  */
 
-#include <RobotinoLocalPlanner.h>
+#include <RTOLocalPlanner.h>
 #include <pluginlib/class_list_macros.h>
 #include <cmath>
 
-PLUGINLIB_EXPORT_CLASS(rto_local_planner::RobotinoLocalPlanner, nav_core::BaseLocalPlanner)
+PLUGINLIB_EXPORT_CLASS(rto_local_planner::RTOLocalPlanner, nav_core::BaseLocalPlanner)
 
 #define TRANSFORM_TIMEOUT 0.5
 #define PI 3.141592653
 
 namespace rto_local_planner
 {
-	RobotinoLocalPlanner::RobotinoLocalPlanner():
+	RTOLocalPlanner::RTOLocalPlanner():
 			tf_(NULL),
 			state_(Finished),
 			curr_heading_index_(0),
@@ -29,12 +29,12 @@ namespace rto_local_planner
     {
 	}
 
-	RobotinoLocalPlanner::~RobotinoLocalPlanner()
+	RTOLocalPlanner::~RTOLocalPlanner()
 	{
 		// Empty
 	}
 
-	void RobotinoLocalPlanner::initialize( std::string name, tf2_ros::Buffer* tf, costmap_2d::Costmap2DROS* costmap_ros )
+	void RTOLocalPlanner::initialize( std::string name, tf2_ros::Buffer* tf, costmap_2d::Costmap2DROS* costmap_ros )
 	{
 		tf_ = tf;
 
@@ -50,13 +50,13 @@ namespace rto_local_planner
 		private_nh.param("num_window_points", num_window_points_, 10 );
 
 		ros::NodeHandle global_node;
-		odom_sub_ = global_node.subscribe<nav_msgs::Odometry>("odom", 1, &RobotinoLocalPlanner::odomCallback, this );
+		odom_sub_ = global_node.subscribe<nav_msgs::Odometry>("odom", 1, &RTOLocalPlanner::odomCallback, this );
 		next_heading_pub_ = private_nh.advertise<visualization_msgs::Marker>("marker", 10);
 
-		ROS_INFO("RobotinoLocalPlanner initialized");
+		ROS_INFO("RTOLocalPlanner initialized");
 	}
 
-	bool RobotinoLocalPlanner::computeVelocityCommands( geometry_msgs::Twist& cmd_vel)
+	bool RTOLocalPlanner::computeVelocityCommands( geometry_msgs::Twist& cmd_vel)
 	{
 		// Set all values of cmd_vel to zero
 		cmd_vel.linear.x = 0.0;
@@ -91,12 +91,12 @@ namespace rto_local_planner
 		return ret;
 	}
 
-	bool RobotinoLocalPlanner::isGoalReached()
+	bool RTOLocalPlanner::isGoalReached()
 	{
 		return ( state_ == Finished );
 	}
 
-	bool RobotinoLocalPlanner::setPlan( const std::vector<geometry_msgs::PoseStamped>& global_plan )
+	bool RTOLocalPlanner::setPlan( const std::vector<geometry_msgs::PoseStamped>& global_plan )
 	{
 		global_plan_.clear();
 
@@ -113,7 +113,7 @@ namespace rto_local_planner
 		return true;
 	}
 
-	void RobotinoLocalPlanner::odomCallback(const nav_msgs::OdometryConstPtr& msg)
+	void RTOLocalPlanner::odomCallback(const nav_msgs::OdometryConstPtr& msg)
 	{
 		//we assume that the odometry is published in the frame of the base
 		boost::mutex::scoped_lock lock(odom_lock_);
@@ -122,7 +122,7 @@ namespace rto_local_planner
 		base_odom_.pose.orientation = msg->pose.pose.orientation;
 	}
 
-	void RobotinoLocalPlanner::publishNextHeading(bool show )
+	void RTOLocalPlanner::publishNextHeading(bool show )
 	{
 		const geometry_msgs::PoseStamped& next_pose = global_plan_[next_heading_index_];
 
@@ -152,7 +152,7 @@ namespace rto_local_planner
 		next_heading_pub_.publish(marker);
 	}
 
-	bool RobotinoLocalPlanner::rotateToStart( geometry_msgs::Twist& cmd_vel )
+	bool RTOLocalPlanner::rotateToStart( geometry_msgs::Twist& cmd_vel )
 	{
 		geometry_msgs::PoseStamped rotate_goal;
 
@@ -205,7 +205,7 @@ namespace rto_local_planner
 		return true;
 	}
 
-	bool RobotinoLocalPlanner::move( geometry_msgs::Twist& cmd_vel )
+	bool RTOLocalPlanner::move( geometry_msgs::Twist& cmd_vel )
 	{
 		publishNextHeading();
 
@@ -276,7 +276,7 @@ namespace rto_local_planner
 		return true;
 	}
 
-	bool RobotinoLocalPlanner::rotateToGoal( geometry_msgs::Twist& cmd_vel )
+	bool RTOLocalPlanner::rotateToGoal( geometry_msgs::Twist& cmd_vel )
 	{
 		geometry_msgs::PoseStamped rotate_goal;
 
@@ -324,7 +324,7 @@ namespace rto_local_planner
 		return true;
 	}
 
-	void RobotinoLocalPlanner::computeNextHeadingIndex()
+	void RTOLocalPlanner::computeNextHeadingIndex()
 	{
 		geometry_msgs::PoseStamped next_heading_pose;
 
@@ -374,7 +374,7 @@ namespace rto_local_planner
 		next_heading_index_ = global_plan_.size() - 1;
 	}
 
-	double RobotinoLocalPlanner::calLinearVel()
+	double RTOLocalPlanner::calLinearVel()
 	{
 		double vel = 0.0;
 
@@ -408,7 +408,7 @@ namespace rto_local_planner
 		return vel;
 	}
 
-	double RobotinoLocalPlanner::calRotationVel( double rotation )
+	double RTOLocalPlanner::calRotationVel( double rotation )
 	{
 		double vel = 0.0;
 
@@ -433,12 +433,12 @@ namespace rto_local_planner
 		return vel;
 	}
 
-	double RobotinoLocalPlanner::linearDistance( geometry_msgs::Point p1, geometry_msgs::Point p2 )
+	double RTOLocalPlanner::linearDistance( geometry_msgs::Point p1, geometry_msgs::Point p2 )
 	{
 		return sqrt( pow( p2.x - p1.x, 2) + pow( p2.y - p1.y, 2)  );
 	}
 
-	double RobotinoLocalPlanner::mapToMinusPIToPI( double angle )
+	double RTOLocalPlanner::mapToMinusPIToPI( double angle )
 	{
 		double angle_overflow = static_cast<double>( static_cast<int>(angle / PI ) );
 

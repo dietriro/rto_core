@@ -1,5 +1,5 @@
 /*
- * RobotinoNode.h
+ * RTONode.h
  *
  *  Created on: 09.12.2011
  *      Author: indorewala@servicerobotics.eu
@@ -28,11 +28,11 @@
 #include <sensor_msgs/JointState.h>
 
 
-class RobotinoNode
+class RTONode
 {
 public:
-	RobotinoNode();
-	~RobotinoNode();
+	RTONode();
+	~RTONode();
 
 private:
 	ros::NodeHandle nh_;

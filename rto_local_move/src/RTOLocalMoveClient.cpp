@@ -1,23 +1,23 @@
 /*
- * RobotinoLocalMoveClient.cpp
+ * RTOLocalMoveClient.cpp
  *
  *  Created on: 14.12.2011
  *      Author: indorewala@servicerobotics.eu
  */
 
-#include "RobotinoLocalMoveClient.h"
+#include "RTOLocalMoveClient.h"
 
-RobotinoLocalMoveClient::RobotinoLocalMoveClient():
+RTOLocalMoveClient::RTOLocalMoveClient():
 	client_( "local_move", false),
 	max_time_( 1.0 )
 {
 }
 
-RobotinoLocalMoveClient::~RobotinoLocalMoveClient()
+RTOLocalMoveClient::~RTOLocalMoveClient()
 {
 }
 
-bool RobotinoLocalMoveClient::checkServer()
+bool RTOLocalMoveClient::checkServer()
 {
 	for( int i = 0; i < 5; ++i)
 	{
@@ -37,7 +37,7 @@ bool RobotinoLocalMoveClient::checkServer()
 	return false;
 }
 
-void RobotinoLocalMoveClient::spin()
+void RTOLocalMoveClient::spin()
 {
 	ros::Rate loop_rate ( 5 );
 	ros::Time start_time = ros::Time::now();
@@ -66,12 +66,12 @@ void RobotinoLocalMoveClient::spin()
 	}
 }
 
-void RobotinoLocalMoveClient::setMaxTime( const float& time )
+void RTOLocalMoveClient::setMaxTime( const float& time )
 {
 	max_time_ = time;
 }
 
-void RobotinoLocalMoveClient::sendGoal( const rto_local_move::LocalMoveGoal& goal )
+void RTOLocalMoveClient::sendGoal( const rto_local_move::LocalMoveGoal& goal )
 {
 	client_.sendGoal( goal );
 	ROS_INFO("Goal sent");

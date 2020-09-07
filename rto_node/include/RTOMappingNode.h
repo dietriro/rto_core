@@ -7,11 +7,11 @@
 #include "NavGoalROS.h"
 #include <ros/ros.h>
 
-class RobotinoMappingNode
+class RTOMappingNode
 {
 public:
-	RobotinoMappingNode();
-	~RobotinoMappingNode();
+	RTOMappingNode();
+	~RTOMappingNode();
 
 	bool spin();
 

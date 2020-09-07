@@ -1,13 +1,13 @@
 /*
- * RobotinoNode.cpp
+ * RTONode.cpp
  *
  *  Created on: 09.12.2011
  *      Author: indorewala@servicerobotics.eu
  */
 
-#include "RobotinoNode.h"
+#include "RTONode.h"
 
-RobotinoNode::RobotinoNode()
+RTONode::RTONode()
 	: nh_("~")
 {
 	nh_.param<std::string>("hostname", hostname_, "172.26.1.1" );
@@ -19,19 +19,19 @@ RobotinoNode::RobotinoNode()
 	distances_clearing_pub_ = nh_.advertise<sensor_msgs::PointCloud>("/distance_sensors_clearing", 1, true);
 	joint_states_pub_= nh_.advertise<sensor_msgs::JointState>("/rto_joint_states", 1, false);
 
-	com_.setName( "RobotinoNode" );
+	com_.setName( "RTONode" );
 
 	initModules();
 	initMsgs();
 }
 
-RobotinoNode::~RobotinoNode()
+RTONode::~RTONode()
 {
 	distances_clearing_pub_.shutdown();
 	joint_states_pub_.shutdown();
 }
 
-void RobotinoNode::initModules()
+void RTONode::initModules()
 {
 	com_.setAddress( hostname_.c_str() );
 
@@ -53,7 +53,7 @@ void RobotinoNode::initModules()
 	com_.connectToServer( false );
 }
 
-void RobotinoNode::initMsgs()
+void RTONode::initMsgs()
 {
 	distances_clearing_msg_.header.frame_id = "base_link";
 	distances_clearing_msg_.header.stamp = curr_time_;
@@ -77,7 +77,7 @@ void RobotinoNode::initMsgs()
 	motor_positions_.resize(4);
 }
 
-void RobotinoNode::publishDistanceMsg()
+void RTONode::publishDistanceMsg()
 {
 //	curr_time_ = ros::Time::now();
 //	if( ( curr_time_ - clearing_time_ ).toSec() > 1 )
@@ -88,7 +88,7 @@ void RobotinoNode::publishDistanceMsg()
 	distances_clearing_pub_.publish( distances_clearing_msg_ );
 }
 
-void RobotinoNode::publishJointStateMsg()
+void RTONode::publishJointStateMsg()
 {
 	motor_array_.getMotorReadings( motor_velocities_, motor_positions_ );
 
@@ -104,7 +104,7 @@ void RobotinoNode::publishJointStateMsg()
 	joint_states_pub_.publish( joint_state_msg_ );
 }
 
-bool RobotinoNode::spin()
+bool RTONode::spin()
 {
 	ros::Rate loop_rate( 30 );
 

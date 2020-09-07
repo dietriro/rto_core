@@ -1,6 +1,6 @@
-#include "RobotinoMappingNode.h"
+#include "RTOMappingNode.h"
 
-RobotinoMappingNode::RobotinoMappingNode()
+RTOMappingNode::RTOMappingNode()
 	: nh_("~")
 {
 	nh_.param<std::string>("hostname", hostname_, "192.168.5.5" );
@@ -10,11 +10,11 @@ RobotinoMappingNode::RobotinoMappingNode()
     initModules();
 }
 
-RobotinoMappingNode::~RobotinoMappingNode()
+RTOMappingNode::~RTOMappingNode()
 {
 }
 
-void RobotinoMappingNode::initModules()
+void RTOMappingNode::initModules()
 {
 	com_.setAddress( hostname_.c_str() );
 
@@ -26,7 +26,7 @@ void RobotinoMappingNode::initModules()
 	com_.connectToServer( false );
 }
 
-bool RobotinoMappingNode::spin()
+bool RTOMappingNode::spin()
 {
 	ros::Rate loop_rate( 30 );
 

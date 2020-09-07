@@ -117,7 +117,7 @@ Visualization Manager:
       Value: true
     - Class: rviz/Marker
       Enabled: true
-      Marker Topic: /move_base/RobotinoLocalPlanner/marker
+      Marker Topic: /move_base/RTOLocalPlanner/marker
       Name: Marker
       Namespaces:
         waypoints: true

@@ -117,7 +117,7 @@ include_directories(
 
 add_executable(
   rto_safety_node
-  src/RobotinoSafety.cpp
+  src/RTOSafety.cpp
   src/rto_safety_node.cpp)
 
 

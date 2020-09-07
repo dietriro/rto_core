@@ -1,18 +1,18 @@
 /*
- * RobotinoSafety.cpp
+ * RTOSafety.cpp
  *
  *  Created on: Mar 21, 2012
  *      Author: indorewala@servicerobotics.eu
  */
 
-#include "RobotinoSafety.h"
+#include "RTOSafety.h"
 
 #define PI 3.141592653
 
 // e1 is the inner ellipse
 // e2 is the outer ellipse
 
-RobotinoSafety::RobotinoSafety():
+RTOSafety::RTOSafety():
 	nh_("~"),
 	stop_bumper_(false),
 	stop_laser_(false),
@@ -28,9 +28,9 @@ RobotinoSafety::RobotinoSafety():
 	e2_viz_pub_ = nh_.advertise<visualization_msgs::Marker>("outer_ellipse_marker", 10);
 
 	rto_cmd_vel_sub_ = nh_.subscribe("/rto_cmd_vel", 1,
-			&RobotinoSafety::rtoCmdVelCallback, this);
-	bumper_sub_ = nh_.subscribe("/bumper", 1, &RobotinoSafety::bumperCallback, this);
-	scan_sub_ = nh_.subscribe("/scan", 1, &RobotinoSafety::scanCallback, this);
+			&RTOSafety::rtoCmdVelCallback, this);
+	bumper_sub_ = nh_.subscribe("/bumper", 1, &RTOSafety::bumperCallback, this);
+	scan_sub_ = nh_.subscribe("/scan", 1, &RTOSafety::scanCallback, this);
 
 	nh_.param( "outer_major_radius", e2_major_radius_, 0.70 );
 	nh_.param( "outer_minor_radius", e2_minor_radius_, 0.30 );
@@ -42,7 +42,7 @@ RobotinoSafety::RobotinoSafety():
 	buildEllipseVizMsgs();
 }
 
-RobotinoSafety::~RobotinoSafety()
+RTOSafety::~RTOSafety()
 {
 	cmd_vel_pub_.shutdown();
 	rto_cmd_vel_sub_.shutdown();
@@ -50,7 +50,7 @@ RobotinoSafety::~RobotinoSafety()
 	scan_sub_.shutdown();
 }
 
-void RobotinoSafety::spin()
+void RTOSafety::spin()
 {
 	ros::Rate lr(20);
 	while( nh_.ok() )
@@ -60,7 +60,7 @@ void RobotinoSafety::spin()
 	}
 }
 
-void RobotinoSafety::calcScale()
+void RTOSafety::calcScale()
 {
 	geometry_msgs::Point32 point_on_e2;
 
@@ -71,7 +71,7 @@ void RobotinoSafety::calcScale()
 	dist_ = scale_;
 }
 
-void RobotinoSafety::buildEllipseVizMsgs()
+void RTOSafety::buildEllipseVizMsgs()
 {
 	e1_viz_msg_.header.frame_id = e2_viz_msg_.header.frame_id = "/base_link";
 	e1_viz_msg_.header.stamp = e2_viz_msg_.header.stamp = ros::Time::now();
@@ -110,7 +110,7 @@ void RobotinoSafety::buildEllipseVizMsgs()
 	}
 }
 
-void RobotinoSafety::rtoCmdVelCallback(const geometry_msgs::TwistConstPtr& msg)
+void RTOSafety::rtoCmdVelCallback(const geometry_msgs::TwistConstPtr& msg)
 {
 	cmd_vel_msg_.linear.x = ( dist_ / scale_ ) * msg->linear.x;
 	cmd_vel_msg_.linear.y = ( dist_ / scale_ ) *msg->linear.y;
@@ -119,7 +119,7 @@ void RobotinoSafety::rtoCmdVelCallback(const geometry_msgs::TwistConstPtr& msg)
 	cmd_vel_pub_.publish(cmd_vel_msg_);
 }
 
-void RobotinoSafety::bumperCallback(const std_msgs::BoolConstPtr& msg)
+void RTOSafety::bumperCallback(const std_msgs::BoolConstPtr& msg)
 {
 	if( msg->data )
 	{
@@ -129,7 +129,7 @@ void RobotinoSafety::bumperCallback(const std_msgs::BoolConstPtr& msg)
 	}
 }
 
-void RobotinoSafety::scanCallback(const sensor_msgs::LaserScanConstPtr& msg)
+void RTOSafety::scanCallback(const sensor_msgs::LaserScanConstPtr& msg)
 {
 	sensor_msgs::PointCloud cloud;
 
@@ -160,7 +160,7 @@ void RobotinoSafety::scanCallback(const sensor_msgs::LaserScanConstPtr& msg)
 	visualizeEllipses();
 }
 
-void RobotinoSafety::check(sensor_msgs::PointCloud cloud)
+void RTOSafety::check(sensor_msgs::PointCloud cloud)
 {
 	stop_laser_ = false;
 	slow_laser_ = false;
@@ -172,7 +172,7 @@ void RobotinoSafety::check(sensor_msgs::PointCloud cloud)
 	}
 }
 
-void RobotinoSafety::inE2(geometry_msgs::Point32 point)
+void RTOSafety::inE2(geometry_msgs::Point32 point)
 {
 	double check = pow( (point.x / e2_major_radius_), 2 ) + pow( (point.y / e2_minor_radius_), 2 ) - 1;
 
@@ -190,12 +190,12 @@ void RobotinoSafety::inE2(geometry_msgs::Point32 point)
 	}
 }
 
-double RobotinoSafety::solveE1(geometry_msgs::Point32 point)
+double RTOSafety::solveE1(geometry_msgs::Point32 point)
 {
 	return ( pow( (point.x / e1_major_radius_), 2 ) + pow( (point.y / e1_minor_radius_), 2 ) - 1 );
 }
 
-void RobotinoSafety::visualizeEllipses(bool show )
+void RTOSafety::visualizeEllipses(bool show )
 {
 	e1_viz_msg_.header.stamp = e2_viz_msg_.header.stamp = ros::Time::now();
 

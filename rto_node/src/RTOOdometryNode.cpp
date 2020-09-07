@@ -1,13 +1,13 @@
 /*
- * RobotinoNode.cpp
+ * RTONode.cpp
  *
  *  Created on: 09.12.2011
  *      Author: indorewala@servicerobotics.eu
  */
 
-#include "RobotinoOdometryNode.h"
+#include "RTOOdometryNode.h"
 
-RobotinoOdometryNode::RobotinoOdometryNode()
+RTOOdometryNode::RTOOdometryNode()
 	: nh_("~")
 {
 	nh_.param<std::string>("hostname", hostname_, "192.168.5.5" );
@@ -17,11 +17,11 @@ RobotinoOdometryNode::RobotinoOdometryNode()
 	initModules();
 }
 
-RobotinoOdometryNode::~RobotinoOdometryNode()
+RTOOdometryNode::~RTOOdometryNode()
 {
 }
 
-void RobotinoOdometryNode::initModules()
+void RTOOdometryNode::initModules()
 {
 	com_.setAddress( hostname_.c_str() );
 
@@ -31,7 +31,7 @@ void RobotinoOdometryNode::initModules()
 	com_.connectToServer( false );
 }
 
-bool RobotinoOdometryNode::spin()
+bool RTOOdometryNode::spin()
 {
 	ros::Rate loop_rate( 30 );
 
