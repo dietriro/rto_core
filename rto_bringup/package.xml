@@ -7,7 +7,6 @@
   <license>BSD</license>
 
   <buildtool_depend>catkin</buildtool_depend>
-  <exec_depend>gazebo_ros</exec_depend>
 
   <exec_depend>rto_node</exec_depend>
   <exec_depend>rto_teleop</exec_depend>
