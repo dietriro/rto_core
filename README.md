@@ -6,7 +6,7 @@ ROS source code for communicating with the Festo Robotino robot (RTO).
 ## ROS 1 Packages for Robotino-Core
 |master|Melodic + Ubuntu Bionic|Noetic + Ubuntu Focal|
 |:---:|:---:|:---:|
-|[![Build Status](https://travis-ci.com/dietriro/rto-core.svg?branch=master)](https://travis-ci.com/dietriro/rto-core)|[![Build Status](https://travis-ci.com/dietriro/rto-core.svg?branch=melodic-devel)](https://travis-ci.com/dietriro/rto-core)|[![Build Status](https://travis-ci.com/dietriro/rto-core.svg?branch=noetic-devel)](https://travis-ci.com/dietriro/rto-core)|
+|[![Build Status](https://travis-ci.com/dietriro/rto_core.svg?branch=master)](https://travis-ci.com/dietriro/rto_core)|[![Build Status](https://travis-ci.com/dietriro/rto_core.svg?branch=melodic-devel)](https://travis-ci.com/dietriro/rto_core)|[![Build Status](https://travis-ci.com/dietriro/rto_core.svg?branch=noetic-devel)](https://travis-ci.com/dietriro/rto_core)|
 
 ## Overview
 
@@ -15,25 +15,25 @@ In the following, all packages within this repository are briefly explained.
 ### Core Repository
 
 <dl>
-  <dt><strong><a href="https://github.com/dietriro/rto-core/tree/noetic-devel/rto_bringup">rto_bringup</a></strong></dt>
+  <dt><strong><a href="https://github.com/dietriro/rto_core/tree/noetic-devel/rto_bringup">rto_bringup</a></strong></dt>
   <dd> Contains config, script and launch files for starting the robot in the real-world. </dd>
-  <dt><strong><a href="https://github.com/dietriro/rto-core/tree/noetic-devel/rto_core">rto_core</a></strong></dt>
+  <dt><strong><a href="https://github.com/dietriro/rto_core/tree/noetic-devel/rto_core">rto_core</a></strong></dt>
   <dd> The meta-package of this repository. </dd>
-  <dt><strong><a href="https://github.com/dietriro/rto-core/tree/noetic-devel/rto_description">rto_description</a></strong></dt>
+  <dt><strong><a href="https://github.com/dietriro/rto_core/tree/noetic-devel/rto_description">rto_description</a></strong></dt>
   <dd> Contains all model (visual) data of the robot and its components (sensors). </dd>
-  <dt><strong><a href="https://github.com/dietriro/rto-core/tree/noetic-devel/rto_local_move">rto_local_move</a></strong></dt>
+  <dt><strong><a href="https://github.com/dietriro/rto_core/tree/noetic-devel/rto_local_move">rto_local_move</a></strong></dt>
   <dd> Contains code for moving the robot locally. </dd>
-  <dt><strong><a href="https://github.com/dietriro/rto-core/tree/noetic-devel/rto_local_planner">rto_local_planner</a></strong></dt>
+  <dt><strong><a href="https://github.com/dietriro/rto_core/tree/noetic-devel/rto_local_planner">rto_local_planner</a></strong></dt>
   <dd> Contains a local planner plugin for move-base, specifically designed for the RTO. </dd>
-  <dt><strong><a href="https://github.com/dietriro/rto-core/tree/noetic-devel/rto_msgs">rto_msgs</a></strong></dt>
+  <dt><strong><a href="https://github.com/dietriro/rto_core/tree/noetic-devel/rto_msgs">rto_msgs</a></strong></dt>
   <dd> Contains special messages needed only for the RTO. </dd>
-  <dt><strong><a href="https://github.com/dietriro/rto-core/tree/noetic-devel/rto_navigation">rto_navigation</a></strong></dt>
+  <dt><strong><a href="https://github.com/dietriro/rto_core/tree/noetic-devel/rto_navigation">rto_navigation</a></strong></dt>
   <dd> Contains launch and configuration files for starting the robots navigation and mapping. </dd>
-  <dt><strong><a href="https://github.com/dietriro/rto-core/tree/noetic-devel/rto_node">rto_node</a></strong></dt>
+  <dt><strong><a href="https://github.com/dietriro/rto_core/tree/noetic-devel/rto_node">rto_node</a></strong></dt>
   <dd> Contains the core source code of the RTO, especially for communication with the rest of the robots hardware. </dd>
-  <dt><strong><a href="https://github.com/dietriro/rto-core/tree/noetic-devel/rto_safety">rto_safety</a></strong></dt>
+  <dt><strong><a href="https://github.com/dietriro/rto_core/tree/noetic-devel/rto_safety">rto_safety</a></strong></dt>
   <dd> Contains a node for collision avoidance, that remaps the velocity in case there is no obstacle in the way. </dd>
-  <dt><strong><a href="https://github.com/dietriro/rto-core/tree/noetic-devel/rto_teleop">rto_teleop</a></strong></dt>
+  <dt><strong><a href="https://github.com/dietriro/rto_core/tree/noetic-devel/rto_teleop">rto_teleop</a></strong></dt>
   <dd> Contains launch files for teleoperating the RTO using either a keyboard or a joystick. </dd>
 </dl>
 
@@ -42,7 +42,7 @@ If you want to operate the robot in a simulated environment (e.g. Gazebo) then p
 ### Related Repositories
 
 <dl>
-  <dt><strong><a href="https://github.com/dietriro/rto-simulation">rto-simulation</a></strong></dt>
+  <dt><strong><a href="https://github.com/dietriro/rto_simulation">rto_simulation</a></strong></dt>
   <dd> This repository contains everything needed for using the RTO in a simulated environment, like Gazebo. </dd>
 </dl>
 
@@ -89,7 +89,7 @@ source devel/setup.bash
 
 # Download the code for rto_core
 cd ~/catkin_ws/src
-git clone https://github.com/dietriro/rto-core.git
+git clone https://github.com/dietriro/rto_core.git
 
 # Install dependencies using rosdep
 cd ~/catkin_ws
