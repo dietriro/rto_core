@@ -8,5 +8,8 @@
   <url type="website">http://wiki.ros.org/rto_description</url>
   <author email="verbeek@servicerobotics.eu">Christian Verbeek</author>
   <!-- The *_depend tags are used to specify dependencies -->
+  
   <buildtool_depend>catkin</buildtool_depend>
+  <exec_depend>p2os_urdf</exec_depend>
+
 </package>
