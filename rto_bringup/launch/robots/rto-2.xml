@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <launch>
     <!-- Core parameters -->
-    <arg name="robot" default="$(env ROBOT)" doc="Robot type [rto-1, rto-2, rto-3]"/>
-    <arg name="robot_env" default="$(env ROBOT_ENV)" doc="Robot environment [sample]"/>
+    <arg name="robot" default="$(env ROBOT)" doc="Robot type [rto-1 rto-2 rto-3]"/>
+    <arg name="robot_env" default="$(env ROBOT_ENV)" doc="Real-world environment []"/>
     <arg name="robot_ip" default="0.0.0.0" />
 
     <!-- Movement parameters -->
@@ -10,6 +10,11 @@
 
     <!-- Sensor parameters -->
     <arg name="sensor_laser" default="true" />
+    <arg name="sensor_3dcam" default="true" />
+
+    <arg name="enable_depth" default="false"/>
+    <arg name="depth2scan" default="false"/>
+    <arg name="depth2scan_topic_pub" default="depth_to_scan"/>
 
     <!-- Start-up core components to communicate with the robot and move it -->
     <include file="$(find rto_bringup)/launch/components/base.xml">
@@ -22,6 +27,15 @@
     <group if="$(arg sensor_laser)">
         <node pkg="tf" type="static_transform_publisher" name="static_tf_laser" args="0.065 0 0.2015 0 0 0 base_link laser 100" />
         <node pkg="urg_node" type="urg_node" name="urg_node" />        
+    </group>
+
+    <!-- Start-up 3dcam if desired -->
+    <group if="$(arg sensor_3dcam)">
+        <node pkg="tf" type="static_transform_publisher" name="static_tf_3dcam" args="0.065 0.03 0.293 0.04 0 0 base_link d400_link 100" />
+        
+        <include file="$(find rto_bringup)/launch/components/rs_d400.xml">
+            <arg name="enable_depth" value="$(arg enable_depth)"/>
+        </include>      
     </group>
     
 </launch>

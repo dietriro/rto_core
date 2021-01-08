@@ -1,6 +1,6 @@
 <launch>
     <!-- Core parameters -->
-    <arg name="robot" default="$(env ROBOT)" doc="Robot type [rto-1]"/>
+    <arg name="robot" default="$(env ROBOT)" doc="Robot type [rto-1 rto-2 rto-3]"/>
     <arg name="robot_ip" default="0.0.0.0" />
 
     <!-- Movement parameters -->
@@ -8,7 +8,7 @@
 
 
     <!-- Load description of robot to param server -->
-    <param name="robot_description" textfile="$(find rto_description)/urdf/$(arg robot).urdf" />
+    <param name="robot_description" textfile="$(find rto_description)/urdf/robots/$(arg robot).urdf" />
 
     <!-- Start-up the drive node for sending movement commands to the robot -->
     <node name="rto_drive" pkg="rto_node" type="rto_node" output="screen">
