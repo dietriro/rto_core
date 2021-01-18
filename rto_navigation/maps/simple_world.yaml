@@ -1,4 +1,4 @@
-image: sim_simple.pgm
+image: simple_world.pgm
 resolution: 0.050000
 origin: [-3.246519, -3.028618, 0.000000]
 negate: 0
