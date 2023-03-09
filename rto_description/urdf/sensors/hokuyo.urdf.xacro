@@ -4,6 +4,17 @@
   <xacro:property name="M_SCALE" value="0.01"/>
   <xacro:property name="HOKUYO_RADIUS" value="0.02"/>
   <xacro:property name="HOKUYO_LENGTH" value="0.07"/>
+  <xacro:property name="USE_GPU" value="false"/>
+  
+  <xacro:if value="${USE_GPU}">
+    <xacro:property name="LASER_TYPE" value="gpu_ray"/>
+    <xacro:property name="FILENAME" value="libgazebo_ros_gpu_laser.so"/>
+  </xacro:if>
+  <xacro:unless value="${USE_GPU}">
+    <xacro:property name="LASER_TYPE" value="ray"/>
+    <xacro:property name="FILENAME" value="libgazebo_ros_laser.so"/>
+  </xacro:unless>
+
   <xacro:macro name="hokuyo" params="parent name *origin">
     <joint name="${name}_joint" type="fixed">
       <xacro:insert_block name="origin" />
@@ -43,7 +54,7 @@
   <!--GAZEBO PLUGIN-->
   <xacro:macro name="hokuyo_gazebo" params="name ros_topic update_rate min_angle max_angle">
     <gazebo reference="${name}_link">
-      <sensor name="${name}" type="gpu_ray">
+      <sensor name="${name}" type="${LASER_TYPE}">
         <!--always_on>true</always_on-->
         <update_rate>40</update_rate>
         <pose>0 0 0 0 0 0</pose>
@@ -68,7 +79,7 @@
             <stddev>0.005</stddev>
           </noise>
         </ray>
-        <plugin name="gazebo_ros_${name}_controller" filename="libgazebo_ros_gpu_laser.so">
+        <plugin name="gazebo_ros_${name}_controller" filename="${FILENAME}">
           <topicName>${ros_topic}</topicName>
           <frameName>${name}_link</frameName>
         </plugin>
